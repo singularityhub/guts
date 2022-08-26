@@ -41,7 +41,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: Guts for ${{ inputs.docker_uri }}
-        uses: ./manifest
+        uses: singularityhub/guts/manifest@main
         with:
           image: ${{ inputs.docker_uri }}
           outfile: ${{ inputs.docker_uri }}
@@ -70,7 +70,7 @@ on:
       - name: Checkout Repository
         uses: actions/checkout@v3
       - name: Guts for ${{ matrix.image }}
-        uses: ./manifest
+        uses: singularityhub/guts/manifest@main
         with:
           image: ${{ matrix.image }}
           outfile: ${{ matrix.image }}.json

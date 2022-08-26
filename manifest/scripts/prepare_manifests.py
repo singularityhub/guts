@@ -58,7 +58,7 @@ class ManifestGenerator:
         paths = self.get_paths(os.path.join(tmpdir, "meta"))
         print(f"\nSearching {image}")
         self.manifests[image] = self.explore_paths(os.path.join(tmpdir, "root"), paths=paths)
-        shutil.rmtree(tmpdir)
+        shutil.rmtree(tmpdir, ignore_errors=True)
         return {image: self.manifests[image]}
 
     def explore_paths(self, root, paths):

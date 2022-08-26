@@ -46,7 +46,7 @@ jobs:
           image: ${{ inputs.docker_uri }}
           outfile: ${{ inputs.docker_uri }}
       - name: View Output
-        run: cat ${{ matix.image }}.json
+        run: cat ${{ matrix.image }}.json
 ```
 
 or for a matrix! E.g., you might want to save them nested in their directory

@@ -99,7 +99,7 @@ class ManifestGenerator:
             if not cfg or "Env" not in cfg:
                 continue
 
-            for envar in cfg.get("Env", []):
+            for envar in cfg.get("Env") or []:
                 if "PATH" in envar:
                     print(envar)
                     envar = envar.replace(" ", "").replace("PATH=", "")

@@ -152,7 +152,7 @@ class ManifestGenerator:
 
         for dirname in save_dir, export_dir:
             os.makedirs(dirname)
-        self.call(["tar", "-xf", export, "-C", export_dir])
+        self.call(["tar", " --no-overwrite-dir", "-xf", export, "-C", export_dir])
         self.call(["tar", "-xf", save, "-C", save_dir])
         return tmpdir
 

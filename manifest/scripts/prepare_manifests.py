@@ -108,7 +108,7 @@ class ManifestGenerator:
 
         self.call(["docker", "pull", image])
 
-        self.call(["docker", "run", "--rm", "--name", prefix, "-d", image, "tail", "-f", "/dev/null"])
+        self.call(["docker", "run", "--rm", "--name", prefix, "--entrypoint", "tail", "-d", image, "-f", "/dev/null"])
 
         # This is the filesystem
         self.call(["docker", "export", prefix, "--output", export])

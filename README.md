@@ -60,6 +60,7 @@ on:
     runs-on: ubuntu-latest
     permissions:
       packages: read
+    strategy:
       max-parallel: 4
       matrix:
         image: ["ubuntu", "centos", "rockylinux", "alpine", "busybox"]
@@ -74,5 +75,4 @@ on:
           image: ${{ matrix.image }}
           outfile: ${{ matrix.image }}.json
       - name: View Output
-        run: cat ${{ matix.image }}.json
-
+        run: cat ${{ matrix.image }}.json

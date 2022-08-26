@@ -63,7 +63,7 @@ on:
     strategy:
       max-parallel: 4
       matrix:
-        image: ["ubuntu", "centos", "rockylinux", "alpine", "busybox"]
+        image: ["ubuntu", "centos", "rockylinux:9.0", "alpine", "busybox"]
 
     name: Generate Matrix
     steps:

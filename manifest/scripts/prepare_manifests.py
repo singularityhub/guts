@@ -41,27 +41,25 @@ def read_json(input_file):
     return data
 
 class ManifestGenerator:
-    def __init__(self, outfile):
-        self.image = image
+    def __init__(self):
         self.check()
+        self.manifests = {}
 
     def check(self):
         if not shutil.which('docker'):
             sys.exit('docker not found, required for export.')
 
-    def run(self):
+    def run(self, image):
         """
         Run the generator to create a paths manifest.
         """
-        # Organized by URI for easier composition
-        manifests = {}
-        print(f"Adding {self.image} to paths manifest")
-        tmpdir = self.docker_export(self.image)
+        print(f"Adding {image} to paths manifest")
+        tmpdir = self.docker_export(image)
         paths = self.get_paths(os.path.join(tmpdir, "meta"))
-        print(f"\nSearching {self.image}")
-        manifests[self.image] = self.explore_paths(os.path.join(tmpdir, "root"), paths=paths)
+        print(f"\nSearching {image}")
+        self.manifests[image] = self.explore_paths(os.path.join(tmpdir, "root"), paths=paths)
         shutil.rmtree(tmpdir)
-        return manifests
+        return {image: self.manifests[image]}
 
     def explore_paths(self, root, paths):
         """
@@ -143,14 +141,13 @@ def get_parser():
         formatter_class=argparse.RawTextHelpFormatter,
     )
     parser.add_argument(
-        "--image",
+        "image",
         help="Container URI to parse",
     )
     parser.add_argument(
-        "-o"
+        "-o",
         "--outfile",
         help="Output manifest file",
-        default="paths-manifest.json",
         dest="outfile",
     )
     return parser
@@ -170,7 +167,10 @@ def main():
     gen = ManifestGenerator()
     manifests = gen.run(args.image)
     if args.outfile:
+        print(f"Saving to {args.outfile}...")
         write_json(manifests, args.outfile)        
+    else:
+        print(json.dumps(manifests, indent=4))
 
 if __name__ == "__main__":
     main()

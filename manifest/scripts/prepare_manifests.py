@@ -87,9 +87,9 @@ class ManifestGenerator:
             print("Found layer config %s" % jsonfile)
             cfg = read_json(jsonfile)
             for envar in cfg['container_config'].get('Env', []):
-                print(envar)
                 if "PATH" in envar:
-                    envar = envar.replace('PATH=', '')
+                    print(envar)
+                    envar = envar.replace(' ', '').replace('PATH=', '')
                     for path in envar.split(':'):
                         paths.add(path)
         return paths

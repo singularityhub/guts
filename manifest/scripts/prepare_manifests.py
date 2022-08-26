@@ -125,8 +125,8 @@ class ManifestGenerator:
 
         for dirname in save_dir, export_dir:          
             os.makedirs(dirname)
-        self.call(["tar", "-xvf", export, "-C", export_dir])
-        self.call(["tar", "-xvf", save, "-C", save_dir])
+        self.call(["tar", "-xf", export, "-C", export_dir])
+        self.call(["tar", "-xf", save, "-C", save_dir])
         return tmpdir
         
 

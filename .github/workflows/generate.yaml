@@ -26,10 +26,10 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       packages: read
-      strategy:
-        max-parallel: 4
-        matrix:
-          image: ["ubuntu", "centos", "rockylinux", "alpine", "busybox"]
+    strategy:
+      max-parallel: 4
+      matrix:
+        image: ["ubuntu", "centos", "rockylinux", "alpine", "busybox"]
 
     name: Generate Matrix
     steps:

@@ -1,4 +1,4 @@
-name: Generate Container Yaml
+name: Generate Container Guts
 on:
   pull_request: []
   workflow_dispatch: 

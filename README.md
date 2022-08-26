@@ -69,10 +69,11 @@ on:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-      - name: Guts for ${{ inputs.docker_uri }}
+      - name: Guts for ${{ matrix.image }}
         uses: ./manifest
         with:
           image: ${{ matrix.image }}
           outfile: ${{ matrix.image }}.json
       - name: View Output
         run: cat ${{ matrix.image }}.json
+```

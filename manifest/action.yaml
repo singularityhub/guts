@@ -23,4 +23,5 @@ runs:
         fi
         cmd="${cmd} ${image}" 
         printf "${cmd}\n"
+        ${cmd}
      shell: bash

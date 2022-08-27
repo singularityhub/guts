@@ -12,12 +12,9 @@ runs:
   using: "composite"
   steps:
    - name: Install Guts
-     run: | 
-       which guts || (
-         pip install git+https://github.com/singularityhub/guts@main
-      )
-
+     run: which guts || pip install git+https://github.com/singularityhub/guts@main
      shell: bash
+
    - name: Guts for ${{ inputs.image }}
      env:
        image: ${{ inputs.image }} 

@@ -1,6 +1,6 @@
 name: Generate Container Guts
 on:
-#  pull_request: []
+  pull_request: []
   workflow_dispatch: 
     inputs:
       docker_uri:
@@ -64,4 +64,3 @@ jobs:
           outfile: ${{ matrix.image }}.json
       - name: View Output
         run: cat ${{ matrix.image }}.json
-

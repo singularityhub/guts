@@ -29,7 +29,7 @@ class ManifestGenerator:
         """
         Derive a save path, if desired.
         """
-        return self.container.path(image)
+        return self.container.save_path(image)
 
     def run(self, image):
         """

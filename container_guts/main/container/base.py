@@ -2,7 +2,7 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2021-2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
-
+import os
 import re
 
 import shutil
@@ -49,7 +49,7 @@ class ContainerName:
         """
         A path for an image
         """
-        return self.uri.replace(":", "-")
+        return self.uri.replace(":", os.sep)
 
     def parse(self, raw):
         """

@@ -14,7 +14,7 @@ inputs:
 outputs:
   outfile:
     description: "Output file generated"
-    value: ${{ steps.guts.outputs.outfile }}
+    value: ${{ steps.guts_run.outputs.outfile }}
 
 runs:
   using: "composite"
@@ -24,7 +24,7 @@ runs:
      shell: bash
 
    - name: Guts for ${{ inputs.image }}
-     id: guts
+     id: guts_run
      env:
        image: ${{ inputs.image }} 
        outfile: ${{ inputs.outfile }} 

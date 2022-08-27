@@ -5,8 +5,16 @@ inputs:
     description: Container Image
     required: true
   outfile:
-    description: Output file (otherwise prints to screen)
+    description: Output file (otherwise prints to screen) over-rides outdir
     required: false
+  outdir:
+    description: Root output directory
+    required: false
+
+outputs:
+  outfile:
+    description: "Output file generated"
+    value: ${{ steps.guts.outputs.outfile }}
 
 runs:
   using: "composite"
@@ -16,13 +24,18 @@ runs:
      shell: bash
 
    - name: Guts for ${{ inputs.image }}
+     id: guts
      env:
        image: ${{ inputs.image }} 
        outfile: ${{ inputs.outfile }} 
+       outdir: ${{ inputs.outdir }} 
      run: | 
         cmd="guts manifest"
         if [ "${outfile}" != "" ]; then
             cmd="${cmd} --outfile ${outfile}"
+        fi
+        if [ "${outdir}" != "" ]; then
+            cmd="${cmd} --outdir ${outdir}"
         fi
         cmd="${cmd} ${image}" 
         printf "${cmd}\n"

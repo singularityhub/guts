@@ -42,7 +42,6 @@ You can use one of our GitHub actions to extract guts!
 Single Image
 ^^^^^^^^^^^^
 
-
 For a single image (e.g., on dispatch)
 
 .. code-block:: yaml
@@ -99,6 +98,29 @@ location.
             run: cat ${{ matrix.image }}.json
 
 
+If you want the library to generate the namespace of the output files, you can
+instead just provide an output directory. The example below also
+shows how to get the path as an output:
+
+.. code-block:: yaml
+
+...
+
+        name: Generate Matrix
+        steps:
+          - name: Checkout Repository
+            uses: actions/checkout@v3
+          - name: Guts for ${{ matrix.image }}
+            uses: singularityhub/guts/manifest@main
+            id: guts
+            with:
+              image: ${{ matrix.image }}
+              outdir: ${{ github.workspace }}
+          - name: View Output
+            env:
+              outfile: ${{ steps.guts.outputs.outfile }}
+            run: cat ${outfile}
+
+
 Note that by default guts will be installed for you, unless you install a custom
 version in a previous step.
-

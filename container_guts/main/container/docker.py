@@ -39,6 +39,13 @@ class DockerContainer(ContainerTechnology):
         return ContainerName(image)
 
     @ensure_container
+    def save_path(self, image):
+        """
+        Derive a save path, if desired.
+        """
+        return image.path
+
+    @ensure_container
     def export(self, image, tmpdir=None):
         """
         Export a docker image into .tar -> directory

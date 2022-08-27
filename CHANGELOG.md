@@ -15,3 +15,4 @@ The versions coincide with releases on pip. Only major versions will be released
 
 ## [0.0.x](https://github.com/singularityhub/guts/tree/main) (0.0.x)
  - Initial creation of project (0.0.1)
+ - Support for output directory (so path prepared by guts) (0.0.11)

@@ -33,7 +33,7 @@ def main(args, parser, extra, subparser):
     # If we have an output file, make sure to set step output
     if outfile:
         print(f"Saving to {outfile}...")
-        print(f'echo "::set-output name=outfile::{outfile}')
+        print(f'echo ::set-output name=outfile::{outfile}')
         utils.write_json(manifests, outfile)
     else:
         print(json.dumps(manifests, indent=4))

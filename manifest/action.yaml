@@ -11,13 +11,16 @@ inputs:
 runs:
   using: "composite"
   steps:
+   - name: Install Guts
+     run: which guts || pip install git+https://github.com/singularityhub/guts@main
+     shell: bash
+
    - name: Guts for ${{ inputs.image }}
      env:
        image: ${{ inputs.image }} 
        outfile: ${{ inputs.outfile }} 
-       action_path: ${{ github.action_path }}
-     run: |
-        cmd="python ${action_path}/scripts/prepare_manifests.py"
+     run: | 
+        cmd="guts manifest"
         if [ "${outfile}" != "" ]; then
             cmd="${cmd} --outfile ${outfile}"
         fi

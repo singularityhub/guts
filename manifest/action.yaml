@@ -20,7 +20,7 @@ runs:
        image: ${{ inputs.image }} 
        outfile: ${{ inputs.outfile }} 
      run: |        
-        cmd="guts"
+        cmd="guts manifest"
         if [ "${outfile}" != "" ]; then
             cmd="${cmd} --outfile ${outfile}"
         fi

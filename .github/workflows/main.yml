@@ -35,4 +35,4 @@ jobs:
           pyflakes container_guts/*.py
           pyflakes container_guts/main/client.py
           pyflakes container_guts/main/templates.py
-          pyflakes container_guts/container/docker.py
+          pyflakes container_guts/main/container/docker.py

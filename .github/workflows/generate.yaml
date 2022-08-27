@@ -17,6 +17,17 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Create conda environment
+        run: conda create --quiet -c conda-forge --name guts
+
+      - uses: actions/checkout@v3
+      - name: Install Guts
+        run: |
+          export PATH="/usr/share/miniconda/bin:$PATH"
+          source activate guts
+          pip install -e .
+
       - name: Guts for ${{ inputs.docker_uri }}
         uses: ./manifest
         with:
@@ -35,6 +46,17 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Create conda environment
+        run: conda create --quiet -c conda-forge --name guts
+
+      - uses: actions/checkout@v3
+      - name: Install Guts
+        run: |
+          export PATH="/usr/share/miniconda/bin:$PATH"
+          source activate guts
+          pip install -e .
+
       - name: Guts for ${{ matrix.image }}
         uses: ./manifest
         with:

@@ -73,8 +73,12 @@ def get_parser():
     manifest.add_argument(
         "-o",
         "--outfile",
-        help="Output manifest file",
+        help="Output manifest file, over-rides outdir",
         dest="outfile",
+    )
+    manifest.add_argument(
+        "--outdir",
+        help="Root to write output structure, not used if not set.",
     )
     return parser
 

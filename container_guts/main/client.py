@@ -25,6 +25,12 @@ class ManifestGenerator:
             logger.exit(f"Container technology {tech} is not supported.")
         self.container = DockerContainer()
 
+    def save_path(self, image):
+        """
+        Derive a save path, if desired.
+        """
+        return self.container.save_path(image)
+
     def run(self, image):
         """
         Run the generator to create a paths manifest.

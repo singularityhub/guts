@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Guide &mdash; Container Guts &#39;Guts&#39; 0.0.1 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>User Guide &mdash; Container Guts &#39;Guts&#39; 0.0.11 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
@@ -29,7 +29,7 @@
             <a href="../index.html" class="icon icon-home"> Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.1
+                0.0.11
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -159,6 +159,40 @@ location.</p>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cat ${{ matrix.image }}.json</span><span class="w"></span>
 </pre></div>
 </div>
+<p>If you want the library to generate the namespace of the output files, you can
+instead just provide an output directory. The example below also
+shows how to get the path as an output:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+<p>…</p>
+<blockquote>
+<div><p>name: Generate Matrix
+steps:</p>
+<blockquote>
+<div><ul>
+<li><p class="first">name: Checkout Repository
+uses: <a class="reference external" href="mailto:actions/checkout&#37;&#52;&#48;v3">actions/checkout<span>&#64;</span>v3</a></p>
+</li>
+<li><p class="first">name: Guts for ${{ matrix.image }}
+uses: <a class="reference external" href="mailto:singularityhub/guts/manifest&#37;&#52;&#48;main">singularityhub/guts/manifest<span>&#64;</span>main</a>
+id: guts
+with:</p>
+<blockquote>
+<div><p>image: ${{ matrix.image }}
+outdir: ${{ github.workspace }}</p>
+</div></blockquote>
+</li>
+<li><p class="first">name: View Output
+env:</p>
+<blockquote>
+<div><p>outfile: ${{ steps.guts.outputs.outfile }}</p>
+</div></blockquote>
+<p>run: cat ${outfile}</p>
+</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
 <p>Note that by default guts will be installed for you, unless you install a custom
 version in a previous step.</p>
 </div>

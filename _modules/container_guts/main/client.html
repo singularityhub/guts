@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>container_guts.main.client &mdash; Container Guts &#39;Guts&#39; 0.0.1 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <title>container_guts.main.client &mdash; Container Guts &#39;Guts&#39; 0.0.11 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/sphinx-argparse.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
@@ -27,7 +27,7 @@
             <a href="../../../index.html" class="icon icon-home"> Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.1
+                0.0.11
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -99,6 +99,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Container technology </span><span class="si">{</span><span class="n">tech</span><span class="si">}</span><span class="s2"> is not supported.&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">container</span> <span class="o">=</span> <span class="n">DockerContainer</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="ManifestGenerator.save_path"><a class="viewcode-back" href="../../../api_reference/container_guts.main.html#container_guts.main.client.ManifestGenerator.save_path">[docs]</a>    <span class="k">def</span> <span class="nf">save_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Derive a save path, if desired.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">container</span><span class="o">.</span><span class="n">save_path</span><span class="p">(</span><span class="n">image</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="ManifestGenerator.run"><a class="viewcode-back" href="../../../api_reference/container_guts.main.html#container_guts.main.client.ManifestGenerator.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>

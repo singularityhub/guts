@@ -5,13 +5,12 @@ __license__ = "MPL 2.0"
 
 import os
 import shutil
-import sys
 
 from .. import utils
 from ..logger import logger
 
-class ManifestGenerator:
 
+class ManifestGenerator:
     def __init__(self, tech="docker"):
         self.init_container_tech(tech)
         self.manifests = {}

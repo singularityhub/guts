@@ -10,6 +10,7 @@ class ensure_container:
     Ensure the first argument is a container, and the name
     is fully formatted into a ContainerName object (for further parsing)
     """
+
     def __init__(self, func):
         update_wrapper(self, func)
         self.func = func

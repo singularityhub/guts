@@ -1,0 +1,38 @@
+name: guts-ci
+
+on:
+  # This should run on a push to any branch except main, gh-pages, and binoc
+  push:
+    branches-ignore:
+      - main
+      - gh-pages
+
+jobs:
+  formatting:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup black linter
+        run: conda create --quiet --name black pyflakes
+
+      - name: Check Spelling
+        uses: crate-ci/typos@592b36d23c62cb378f6097a292bc902ee73f93ef # version 1.0.4
+        with:
+          files: ./docs/getting_started/ ./docs/index.rst
+
+      - name: Lint python code
+        run: |
+          export PATH="/usr/share/miniconda/bin:$PATH"
+          source activate black
+          pip install black
+          black --check shpc
+          
+      - name: Check imports with pyflakes
+        run: |
+          export PATH="/usr/share/miniconda/bin:$PATH"
+          source activate black
+          pyflakes container_guts/*/py
+          pyflakes container_guts/main/client.py
+          pyflakes container_guts/main/templates.py
+          pyflakes container_guts/container/docker.py

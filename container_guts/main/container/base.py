@@ -3,7 +3,6 @@ __copyright__ = "Copyright 2021-2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
-import os
 import re
 
 import shutil
@@ -33,10 +32,10 @@ class ContainerName:
     def uri(self):
         """
         Show the full uri
-        """    
+        """
         uri = self.tool
         if self.namespace:
-            uri = f"{self.namespace}/{uri}"        
+            uri = f"{self.namespace}/{uri}"
 
         # Can only add registry given namespace
         if self.registry and self.namespace:
@@ -44,13 +43,13 @@ class ContainerName:
         if self.tag:
             uri = f"{uri}:{self.tag}"
         return uri
-        
+
     @property
     def path(self):
         """
         A path for an image
         """
-        return self.uri.replace(':', '-')
+        return self.uri.replace(":", "-")
 
     def parse(self, raw):
         """
@@ -71,10 +70,12 @@ class ContainerName:
         if not self.registry:
             self.registry = "docker.io"
 
+
 class ContainerTechnology:
     """
     A base class for a container technology
     """
+
     def __init__(self):
         if hasattr(self, "command") and not shutil.which(self.command):
             logger.exit(
@@ -82,14 +83,13 @@ class ContainerTechnology:
                 % (self.command.capitalize(), self.command)
             )
 
-
     def call(self, command, stream=True):
         """
         Call a command and check for error.
         """
         res = utils.run_command(command, stream=stream)
         if res["return_code"] != 0:
-            logger.exit(f"There was an issue running %s" %" ".join(command))
+            logger.exit("There was an issue running %s" % " ".join(command))
         return res
 
     def __str__(self):

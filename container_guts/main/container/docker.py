@@ -6,10 +6,8 @@ __license__ = "MPL 2.0"
 import json
 import os
 import sys
-from datetime import datetime
 
 import container_guts.utils as utils
-from container_guts.logger import logger
 from .decorator import ensure_container
 
 from .base import ContainerTechnology, ContainerName
@@ -19,6 +17,7 @@ class DockerContainer(ContainerTechnology):
     """
     A Docker container controller.
     """
+
     command = "docker"
 
     @ensure_container
@@ -34,16 +33,16 @@ class DockerContainer(ContainerTechnology):
     def get_container(self, image):
         """
         Courtesy function to get a container from a URI.
-        """ 
+        """
         if isinstance(image, ContainerName):
             return image
         return ContainerName(image)
-    
+
     @ensure_container
     def export(self, image, tmpdir=None):
         """
         Export a docker image into .tar -> directory
-        
+
         Since we also want a filesystem from a running container, we use
         save and export dually. This could be adjusted to be completely
         static and just use save, if desired.
@@ -58,9 +57,9 @@ class DockerContainer(ContainerTechnology):
         export_dir = os.path.join(tmpdir, "root")
         save_dir = os.path.join(tmpdir, "meta")
 
-        self.pull(image.uri);
+        self.pull(image.uri)
         self.run(image.uri, ["-f", "/dev/null"], entrypoint="tail", name=prefix)
-        
+
         # This is the filesystem (export done by container name)
         self.call([self.command, "export", prefix, "--output", export])
 
@@ -90,11 +89,11 @@ class DockerContainer(ContainerTechnology):
         if entrypoint:
             cmd += ["--entrypoint", entrypoint]
         if detached:
-            cmd.append('-d')
+            cmd.append("-d")
         cmd.append(image)
         cmd += command
         print(" ".join(cmd))
-        return self.call(cmd)        
+        return self.call(cmd)
 
     def pull(self, image):
         """

@@ -13,6 +13,7 @@ import tempfile
 
 from container_guts.logger import logger
 
+
 def can_be_deleted(path, ignore_files=None):
     """
     A path can be deleted if it contains no entries, *or*

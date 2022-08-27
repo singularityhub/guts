@@ -13,11 +13,7 @@ LICENSE = "LICENSE"
 ################################################################################
 # Global requirements
 
-# Since we assume wanting Singularity and lmod, we require spython and Jinja2
-
-INSTALL_REQUIRES = (
-    ("spython", {"min_version": "0.2.0"}),
-)
+INSTALL_REQUIRES = ()
 
 TESTS_REQUIRES = (("pytest", {"min_version": "4.6.2"}),)
 

@@ -2,12 +2,9 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
-import os
-import sys
 import json
 
 import container_guts.utils as utils
-from ..logger import logger
 from ..main import ManifestGenerator
 
 
@@ -25,4 +22,3 @@ def main(args, parser, extra, subparser):
         utils.write_json(manifests, args.outfile)
     else:
         print(json.dumps(manifests, indent=4))
-

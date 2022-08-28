@@ -24,12 +24,12 @@ jobs:
       - name: Test Basic Guts
         uses: ./action/manifest
         with:
-          image: "quay.io/autamus/clingo:5.5.1"
+          image: centos
 
       - name: Filesystem Include
         uses: ./action/manifest
         with:
-          image: "quay.io/autamus/clingo:5.5.1"
+          image: centos
           include: fs
 
   generate-recipes:

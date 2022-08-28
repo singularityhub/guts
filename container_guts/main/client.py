@@ -126,7 +126,7 @@ class ManifestGenerator:
             if os.path.exists(root_path):
                 print(f"... {path}")
                 [files.add(x) for x in os.listdir(root_path)]
-            manifest[path] = list(files)
+            manifest[path] = sorted(list(files))
         return manifest
 
     def get_manifests(self, root):

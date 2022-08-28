@@ -1,18 +1,10 @@
 name: Generate Container Guts
 on:
   pull_request: []
-  workflow_dispatch: 
-    inputs:
-      docker_uri:
-        description: 'Docker identifier to generate recipe for'
-        required: true
-        default: "quay.io/autamus/clingo:5.5.1"
+
 jobs:
   generate-recipe:
-    if: (inputs.docker_uri != '')
     runs-on: ubuntu-latest
-    permissions:
-      packages: read
     name: ${{ inputs.docker_uri }}
     steps:
       - name: Checkout Repository
@@ -27,11 +19,18 @@ jobs:
           export PATH="/usr/share/miniconda/bin:$PATH"
           source activate guts
           pip install -e .
+          echo "/usr/share/miniconda/bin" >> ${GITHUB_PATH}
 
-      - name: Guts for ${{ inputs.docker_uri }}
-        uses: ./manifest
+      - name: Test Basic Guts
+        uses: ./action/manifest
         with:
-          image: ${{ inputs.docker_uri }}
+          image: centos
+
+      - name: Filesystem Include
+        uses: ./action/manifest
+        with:
+          image: centos
+          include: fs
 
   generate-recipes:
     runs-on: ubuntu-latest
@@ -56,9 +55,10 @@ jobs:
           export PATH="/usr/share/miniconda/bin:$PATH"
           source activate guts
           pip install -e .
+          echo "/usr/share/miniconda/bin" >> ${GITHUB_PATH}
 
       - name: Guts for ${{ matrix.image }}
-        uses: ./manifest
+        uses: ./action/manifest
         with:
           image: ${{ matrix.image }}
           outfile: ${{ matrix.image }}.json

@@ -2,6 +2,7 @@ __author__ = "Vanessa Sochat"
 __copyright__ = "Copyright 2022, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
+import sys
 import json
 import os
 
@@ -16,10 +17,14 @@ def main(args, parser, extra, subparser):
     print("       outfile: %s" % args.outfile)
     print("        outdir: %s" % args.outdir)
     print("container tech: %s" % args.container_tech)
-    print("       include: %s" % args.guts)
+    print("      database: %s" % args.database)
 
+    print("This command is not fully implemented yet, come back soon!")
+    sys.exit()
+
+    # Derive an initial manifest
     cli = ManifestGenerator(tech=args.container_tech)
-    manifests = cli.run(args.image, includes=args.guts)
+    manifests = cli.diff(args.image, database=args.database)
     outfile = None
 
     # Default to using outfile first, then outdir if defined

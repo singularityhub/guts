@@ -39,14 +39,18 @@ class DockerContainer(ContainerTechnology):
         return ContainerName(image)
 
     @ensure_container
-    def save_path(self, image):
+    def cleanup(self, image):
         """
-        Derive a save path, if desired.
+        Stop and remove an image.
         """
-        return image.path
+        self.call([self.command, "stop", image.container_name], allow_fail=True)
+        self.call(
+            [self.command, "rm", "--force", image.container_name], allow_fail=True
+        )
+        self.call([self.command, "rmi", "--force", image.uri], allow_fail=True)
 
     @ensure_container
-    def export(self, image, tmpdir=None):
+    def export(self, image, tmpdir=None, cleanup=True):
         """
         Export a docker image into .tar -> directory
 
@@ -58,23 +62,25 @@ class DockerContainer(ContainerTechnology):
             tmpdir = utils.get_tmpdir()
 
         # Prepare paths for saving
-        prefix = image.uri.replace("/", "-").replace(":", "-")
-        save = os.path.join(tmpdir, f"{prefix}-save.tar")
-        export = os.path.join(tmpdir, f"{prefix}.tar")
+        save = os.path.join(tmpdir, f"{image.container_name}-save.tar")
+        export = os.path.join(tmpdir, f"{image.container_name}.tar")
         export_dir = os.path.join(tmpdir, "root")
         save_dir = os.path.join(tmpdir, "meta")
 
         self.pull(image.uri)
-        self.run(image.uri, ["-f", "/dev/null"], entrypoint="tail", name=prefix)
+        self.run(
+            image.uri, ["-f", "/dev/null"], entrypoint="tail", name=image.container_name
+        )
 
         # This is the filesystem (export done by container name)
-        self.call([self.command, "export", prefix, "--output", export])
+        self.call([self.command, "export", image.container_name, "--output", export])
 
         # This will have the config
         self.call([self.command, "save", image.uri, "--output", save])
-        self.call([self.command, "stop", prefix])
-        self.call([self.command, "rm", "--force", prefix])
-        self.call([self.command, "rmi", "--force", image.uri])
+
+        # Diff does not cleanup so we can still inspect image
+        if cleanup:
+            self.cleanup(image)
 
         for tar in export, save:
             if not os.path.exists(tar):

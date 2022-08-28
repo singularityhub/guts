@@ -10,6 +10,10 @@ inputs:
   outdir:
     description: Root output directory
     required: false
+  include:
+    description: List of (space separated) includes to extract
+    required: false
+    default: paths
 
 outputs:
   outfile:
@@ -29,6 +33,7 @@ runs:
        image: ${{ inputs.image }} 
        outfile: ${{ inputs.outfile }} 
        outdir: ${{ inputs.outdir }} 
+       includes: ${{ inputs.include }}
      run: | 
         cmd="guts manifest"
         if [ "${outfile}" != "" ]; then
@@ -37,6 +42,9 @@ runs:
         if [ "${outdir}" != "" ]; then
             cmd="${cmd} --outdir ${outdir}"
         fi
+        for include in ${includes}; do
+            cmd="${cmd} --include ${include}"
+        done
         cmd="${cmd} ${image}" 
         printf "${cmd}\n"
         ${cmd}

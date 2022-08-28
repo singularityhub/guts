@@ -29,6 +29,13 @@ class ContainerName:
         return self.uri
 
     @property
+    def container_name(self):
+        """
+        Derive a container name from the uri
+        """
+        return self.uri.replace("/", "-").replace(":", "-")
+
+    @property
     def uri(self):
         """
         Show the full uri
@@ -83,12 +90,12 @@ class ContainerTechnology:
                 % (self.command.capitalize(), self.command)
             )
 
-    def call(self, command, stream=True):
+    def call(self, command, stream=True, allow_fail=False):
         """
         Call a command and check for error.
         """
         res = utils.run_command(command, stream=stream)
-        if res["return_code"] != 0:
+        if res["return_code"] != 0 and not allow_fail:
             logger.exit("There was an issue running %s" % " ".join(command))
         return res
 

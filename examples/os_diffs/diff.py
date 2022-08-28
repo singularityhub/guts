@@ -88,8 +88,19 @@ class ContainerDiffer:
                 Apaths = [x for x in Apaths if x not in Bpaths]
                 if not Apaths:
                     break
-            uniques[A] = Apaths
+            uniques[A] = sorted(Apaths)
         return uniques
+
+    def filter_hidden(self, paths):
+        """
+        Filter out hidden paths that might be temporary.
+        """
+        finals = []
+        for path in paths:
+            if any(x.startswith(".") for x in path.split(os.sep)):
+                continue
+            finals.append(path)
+        return finals
 
     def diff(self):
         """
@@ -117,8 +128,12 @@ class ContainerDiffer:
         return df
 
     def read_fs(self, jsonA):
+        """
+        Read filesystem entries and filter out hidden paths
+        """
         A = read_json(jsonA)
-        return set(list(A.values())[0]["fs"])
+        paths = set(list(A.values())[0]["fs"])
+        return self.filter_hidden(paths)
 
     def calculate_diff(self, jsonA, jsonB):
         """
@@ -128,8 +143,8 @@ class ContainerDiffer:
         -------------------------
         union of items in A and B
         """
-        A = self.read_fs(jsonA)
-        B = self.read_fs(jsonB)
+        A = set(self.read_fs(jsonA))
+        B = set(self.read_fs(jsonB))
 
         return len(A.intersection(B)) / len(A.union(B))
 

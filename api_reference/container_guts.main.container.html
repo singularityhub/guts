@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>container_guts.main.container package &mdash; Container Guts &#39;Guts&#39; 0.0.12 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>container_guts.main.container package &mdash; Container Guts &#39;Guts&#39; 0.0.13 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
@@ -29,7 +29,7 @@
             <a href="../index.html" class="icon icon-home"> Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.12
+                0.0.13
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -108,6 +108,12 @@
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Parse a container name into named parts</p>
 <dl class="py method">
+<dt id="container_guts.main.container.base.ContainerName.container_name">
+<em class="property"><span class="pre">property</span> </em><code class="descname"><span class="pre">container_name</span></code><a class="headerlink" href="#container_guts.main.container.base.ContainerName.container_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Derive a container name from the uri</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="container_guts.main.container.base.ContainerName.parse">
 <code class="descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">raw</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/container/base.html#ContainerName.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.container.base.ContainerName.parse" title="Permalink to this definition">¶</a></dt>
 <dd><p>Parse a name into known pieces</p>
@@ -134,7 +140,7 @@
 <p>A base class for a container technology</p>
 <dl class="py method">
 <dt id="container_guts.main.container.base.ContainerTechnology.call">
-<code class="descname"><span class="pre">call</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">command</span></span></em>, <em><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/container/base.html#ContainerTechnology.call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.container.base.ContainerTechnology.call" title="Permalink to this definition">¶</a></dt>
+<code class="descname"><span class="pre">call</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">command</span></span></em>, <em><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em><span class="n"><span class="pre">allow_fail</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/container/base.html#ContainerTechnology.call"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.container.base.ContainerTechnology.call" title="Permalink to this definition">¶</a></dt>
 <dd><p>Call a command and check for error.</p>
 </dd></dl>
 
@@ -159,6 +165,11 @@ is fully formatted into a ContainerName object (for further parsing)</p>
 <em class="property"><span class="pre">class</span> </em><code class="descclassname"><span class="pre">container_guts.main.container.docker.</span></code><code class="descname"><span class="pre">DockerContainer</span></code><a class="reference internal" href="../_modules/container_guts/main/container/docker.html#DockerContainer"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.container.docker.DockerContainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#container_guts.main.container.base.ContainerTechnology" title="container_guts.main.container.base.ContainerTechnology"><code class="xref py py-class docutils literal notranslate"><span class="pre">container_guts.main.container.base.ContainerTechnology</span></code></a></p>
 <p>A Docker container controller.</p>
+<dl class="py method">
+<dt id="container_guts.main.container.docker.DockerContainer.cleanup">
+<code class="descname"><span class="pre">cleanup</span></code><span class="sig-paren">(</span><em><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#container_guts.main.container.docker.DockerContainer.cleanup" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="py attribute">
 <dt id="container_guts.main.container.docker.DockerContainer.command">
 <code class="descname"><span class="pre">command</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'docker'</span></em><a class="headerlink" href="#container_guts.main.container.docker.DockerContainer.command" title="Permalink to this definition">¶</a></dt>
@@ -192,11 +203,6 @@ is fully formatted into a ContainerName object (for further parsing)</p>
 <code class="descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">image</span></span></em>, <em><span class="n"><span class="pre">command</span></span></em>, <em><span class="n"><span class="pre">entrypoint</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em><span class="n"><span class="pre">detached</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/container/docker.html#DockerContainer.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.container.docker.DockerContainer.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Run a container detached, assuming the entrypoint goes to tail /dev/null.</p>
 </dd></dl>
-
-<dl class="py method">
-<dt id="container_guts.main.container.docker.DockerContainer.save_path">
-<code class="descname"><span class="pre">save_path</span></code><span class="sig-paren">(</span><em><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#container_guts.main.container.docker.DockerContainer.save_path" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 <dl class="py method">
 <dt id="container_guts.main.container.docker.DockerContainer.shell">

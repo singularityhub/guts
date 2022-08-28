@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>container_guts.main package &mdash; Container Guts &#39;Guts&#39; 0.0.12 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>container_guts.main package &mdash; Container Guts &#39;Guts&#39; 0.0.13 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
@@ -29,7 +29,7 @@
             <a href="../index.html" class="icon icon-home"> Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.12
+                0.0.13
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -121,14 +121,36 @@
 <em class="property"><span class="pre">class</span> </em><code class="descclassname"><span class="pre">container_guts.main.client.</span></code><code class="descname"><span class="pre">ManifestGenerator</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">tech</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'docker'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/client.html#ManifestGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.client.ManifestGenerator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <dl class="py method">
+<dt id="container_guts.main.client.ManifestGenerator.diff">
+<code class="descname"><span class="pre">diff</span></code><span class="sig-paren">(</span><em><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.diff" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt id="container_guts.main.client.ManifestGenerator.explore_paths">
 <code class="descname"><span class="pre">explore_paths</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">root</span></span></em>, <em><span class="n"><span class="pre">paths</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/client.html#ManifestGenerator.explore_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.explore_paths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Find executables under a path.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="container_guts.main.client.ManifestGenerator.get_paths">
-<code class="descname"><span class="pre">get_paths</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/client.html#ManifestGenerator.get_paths"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.get_paths" title="Permalink to this definition">¶</a></dt>
+<dt id="container_guts.main.client.ManifestGenerator.extract">
+<code class="descname"><span class="pre">extract</span></code><span class="sig-paren">(</span><em><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.extract" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="container_guts.main.client.ManifestGenerator.extract_filesystem">
+<code class="descname"><span class="pre">extract_filesystem</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/client.html#ManifestGenerator.extract_filesystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.extract_filesystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>List all contents of the filesystem</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="container_guts.main.client.ManifestGenerator.get_container">
+<code class="descname"><span class="pre">get_container</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/client.html#ManifestGenerator.get_container"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.get_container" title="Permalink to this definition">¶</a></dt>
+<dd><p>Courtesy function to get a container from a URI.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="container_guts.main.client.ManifestGenerator.get_manifests">
+<code class="descname"><span class="pre">get_manifests</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">root</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/client.html#ManifestGenerator.get_manifests"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.get_manifests" title="Permalink to this definition">¶</a></dt>
 <dd><p>Given the root of a container extracted meta directory, read all json
 configs and derive a final set of paths to explore.</p>
 </dd></dl>
@@ -141,15 +163,13 @@ configs and derive a final set of paths to explore.</p>
 
 <dl class="py method">
 <dt id="container_guts.main.client.ManifestGenerator.run">
-<code class="descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/client.html#ManifestGenerator.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.run" title="Permalink to this definition">¶</a></dt>
-<dd><p>Run the generator to create a paths manifest.</p>
-</dd></dl>
+<code class="descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.run" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt id="container_guts.main.client.ManifestGenerator.save_path">
-<code class="descname"><span class="pre">save_path</span></code><span class="sig-paren">(</span><em><span class="n"><span class="pre">image</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/main/client.html#ManifestGenerator.save_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.save_path" title="Permalink to this definition">¶</a></dt>
-<dd><p>Derive a save path, if desired.</p>
-</dd></dl>
+<code class="descname"><span class="pre">save_path</span></code><span class="sig-paren">(</span><em><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#container_guts.main.client.ManifestGenerator.save_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </dd></dl>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Guide &mdash; Container Guts &#39;Guts&#39; 0.0.12 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>User Guide &mdash; Container Guts &#39;Guts&#39; 0.0.13 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
@@ -29,7 +29,7 @@
             <a href="../index.html" class="icon icon-home"> Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.12
+                0.0.13
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -44,7 +44,8 @@
 <li class="toctree-l1"><a class="reference internal" href="index.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#guts">Guts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manifest">Manifest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#diff">Diff</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#github-action">GitHub Action</a></li>
 </ul>
 </li>
@@ -91,10 +92,11 @@
 <h2>Commands<a class="headerlink" href="#commands" title="Permalink to this headline">¶</a></h2>
 <p>Guts currently has just one client command, “manifest” to
 get a manifest of executables on the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>!</p>
-<div class="section" id="guts">
-<h3>Guts<a class="headerlink" href="#guts" title="Permalink to this headline">¶</a></h3>
-<p>Using guts on the command line is the easiest way to test it manually.
-By default, the results will be printed to the screen:</p>
+<div class="section" id="manifest">
+<h3>Manifest<a class="headerlink" href="#manifest" title="Permalink to this headline">¶</a></h3>
+<p>Using guts on the command line is the easiest way to test it manually,
+and by default, the results will be printed to the screen. The manifest
+command will generate “guts” for an image:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>guts manifest ubuntu
 </pre></div>
 </div>
@@ -102,13 +104,33 @@ By default, the results will be printed to the screen:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>guts manifest --outfile ubuntu-guts.json ubuntu
 </pre></div>
 </div>
-<p>We currently have a generic “manifest” command, as there is only one thing
-to export. If we add more things, this can be extended.</p>
+<p>By default, we extract executables on the PATH. However, you can also ask
+to extract all filesystem paths:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>guts manifest --include fs ubuntu
+</pre></div>
+</div>
+<p>Or to get fs and paths:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>guts manifest --include paths --include fs ubuntu --outfile ubuntu-guts.json
+</pre></div>
+</div>
+<p>This generic “manifest” command is the main entrypoint to extract guts.</p>
+</div>
+<div class="section" id="diff">
+<h3>Diff<a class="headerlink" href="#diff" title="Permalink to this headline">¶</a></h3>
+<p><strong>under development</strong></p>
+<p>A diff will take your container and compares it against a set of base images,
+and only reveals the diff output (the executables in PATH that are special
+to your container). If you don’t provide a database (repository or path
+on the filesystem) we use the default at <code class="docutils literal notranslate"><span class="pre">singularityhub/shpc-guts</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>guts diff vanessa/salad
+</pre></div>
+</div>
+<p>Note that this command is not officially added yet!</p>
 <div class="section" id="github-action">
 <h4>GitHub Action<a class="headerlink" href="#github-action" title="Permalink to this headline">¶</a></h4>
 <p>You can use one of our GitHub actions to extract guts!</p>
-<div class="section" id="single-image">
-<h5>Single Image<a class="headerlink" href="#single-image" title="Permalink to this headline">¶</a></h5>
+<div class="section" id="single-image-manifest">
+<h5>Single Image Manifest<a class="headerlink" href="#single-image-manifest" title="Permalink to this headline">¶</a></h5>
 <p>For a single image (e.g., on dispatch)</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate Container Guts</span><span class="w"></span>
 <span class="nt">on</span><span class="p">:</span><span class="w"></span>
@@ -126,7 +148,7 @@ to export. If we add more things, this can be extended.</p>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Repository</span><span class="w"></span>
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Guts for ${{ inputs.docker_uri }}</span><span class="w"></span>
-<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">singularityhub/guts/manifest@main</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">singularityhub/guts/action/manifest@main</span><span class="w"></span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
 <span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ inputs.docker_uri }}</span><span class="w"></span>
 <span class="w">          </span><span class="nt">outfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ inputs.docker_uri }}</span><span class="w"></span>
@@ -134,6 +156,9 @@ to export. If we add more things, this can be extended.</p>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cat ${{ matrix.image }}.json</span><span class="w"></span>
 </pre></div>
 </div>
+</div>
+<div class="section" id="matrix-images-manifest">
+<h5>Matrix Images Manifest<a class="headerlink" href="#matrix-images-manifest" title="Permalink to this headline">¶</a></h5>
 <p>or for a matrix! E.g., you might want to save them nested in their directory
 location.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate Container Guts</span><span class="w"></span>
@@ -151,7 +176,7 @@ location.</p>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Repository</span><span class="w"></span>
 <span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span><span class="w"></span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Guts for ${{ matrix.image }}</span><span class="w"></span>
-<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">singularityhub/guts/manifest@main</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">singularityhub/guts/action/manifest@main</span><span class="w"></span>
 <span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
 <span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.image }}</span><span class="w"></span>
 <span class="w">          </span><span class="nt">outfile</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.image }}.json</span><span class="w"></span>
@@ -175,7 +200,7 @@ steps:</p>
 uses: <a class="reference external" href="mailto:actions/checkout&#37;&#52;&#48;v3">actions/checkout<span>&#64;</span>v3</a></p>
 </li>
 <li><p class="first">name: Guts for ${{ matrix.image }}
-uses: <a class="reference external" href="mailto:singularityhub/guts/manifest&#37;&#52;&#48;main">singularityhub/guts/manifest<span>&#64;</span>main</a>
+uses: <a class="reference external" href="mailto:singularityhub/guts/action/manifest&#37;&#52;&#48;main">singularityhub/guts/action/manifest<span>&#64;</span>main</a>
 id: guts
 with:</p>
 <blockquote>
@@ -193,6 +218,38 @@ env:</p>
 </ul>
 </div></blockquote>
 </div></blockquote>
+</div>
+<div class="section" id="id1">
+<h5>Diff<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
+<p><strong>not developed yet but coming soon!</strong></p>
+<p>The core functionality of guts is to discover new or interesting things in
+the PATH, and this is the goal of diff. You can provide a guts root
+path with your custom guts (e.g., the content of <a class="reference external" href="https://github.com/singularityhub/shpc-guts">shpc-guts</a>
+but if it’s not provided, we will clone that one, which updates
+base images nightly.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diff Container Guts</span><span class="w"></span>
+<span class="nt">on</span><span class="p">:</span><span class="w"></span>
+<span class="w">  </span><span class="nt">pull_request</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span><span class="w"></span>
+<span class="w">  </span><span class="nt">generate-recipes</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-latest</span><span class="w"></span>
+<span class="w">    </span><span class="nt">strategy</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="nt">max-parallel</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w"></span>
+<span class="w">      </span><span class="nt">matrix</span><span class="p">:</span><span class="w"></span>
+<span class="w">        </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;vanessa/salad&quot;</span><span class="p p-Indicator">]</span><span class="w"></span>
+
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate Diffs</span><span class="w"></span>
+<span class="w">    </span><span class="nt">steps</span><span class="p">:</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Checkout Repository</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v3</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diff for ${{ matrix.image }}</span><span class="w"></span>
+<span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">singularityhub/guts/action/diff@main</span><span class="w"></span>
+<span class="w">        </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">guts</span><span class="w"></span>
+<span class="w">        </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+<span class="w">          </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.image }}</span><span class="w"></span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">View Output</span><span class="w"></span>
+<span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cat ${{ steps.guts.outputs.outfile }}</span><span class="w"></span>
+</pre></div>
+</div>
 <p>Note that by default guts will be installed for you, unless you install a custom
 version in a previous step.</p>
 </div>

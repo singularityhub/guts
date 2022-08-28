@@ -161,6 +161,8 @@ shows how to get the path as an output:
 Diff
 ^^^^
 
+**not developed yet but coming soon!**
+
 The core functionality of guts is to discover new or interesting things in
 the PATH, and this is the goal of diff. You can provide a guts root
 path with your custom guts (e.g., the content of `shpc-guts <https://github.com/singularityhub/shpc-guts>`_
@@ -188,7 +190,6 @@ base images nightly.
             id: guts
             with:
               image: ${{ matrix.image }}
-              outdir: ${{ github.workspace }}
           - name: View Output
             run: cat ${{ steps.guts.outputs.outfile }}
 

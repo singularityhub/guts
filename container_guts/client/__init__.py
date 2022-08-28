@@ -55,31 +55,53 @@ def get_parser():
 
     manifest = subparsers.add_parser(
         "manifest",
-        description="export manifest of executables on the PATH, guts!",
+        description="export manifest of guts!",
         formatter_class=argparse.RawTextHelpFormatter,
     )
-    manifest.add_argument(
-        "-c",
-        "--container-tech",
-        dest="container_tech",
-        help="container technology to use for exporting",
-        choices=["docker"],
-        default="docker",
+    diff = subparsers.add_parser(
+        "diff",
+        description="take a diff of your container against a guts database.",
+        formatter_class=argparse.RawTextHelpFormatter,
     )
-    manifest.add_argument(
-        "image",
-        help="Container URI to parse",
+    diff.add_argument(
+        "--db",
+        "--database",
+        help="Database root (of json files) to use, either filesystem or git URL to clone",
+        dest="database",
     )
-    manifest.add_argument(
-        "-o",
-        "--outfile",
-        help="Output manifest file, over-rides outdir",
-        dest="outfile",
-    )
-    manifest.add_argument(
-        "--outdir",
-        help="Root to write output structure, not used if not set.",
-    )
+
+    for command in manifest, diff:
+        command.add_argument(
+            "-i",
+            "--include",
+            help="Type of guts to include in extraction (defaults to paths)",
+            dest="guts",
+            choices=["fs", "paths"],
+            action="append",
+            default=[],
+        )
+        command.add_argument(
+            "-c",
+            "--container-tech",
+            dest="container_tech",
+            help="container technology to use for exporting",
+            choices=["docker"],
+            default="docker",
+        )
+        command.add_argument(
+            "image",
+            help="Container URI to parse",
+        )
+        command.add_argument(
+            "-o",
+            "--outfile",
+            help="Output manifest file, over-rides outdir",
+            dest="outfile",
+        )
+        command.add_argument(
+            "--outdir",
+            help="Root to write output structure, not used if not set.",
+        )
     return parser
 
 
@@ -135,6 +157,8 @@ def run():
     # Does the user want a shell?
     if args.command == "manifest":
         from .manifest import main
+    elif args.command == "diff":
+        from .diff import main
 
     # Pass on to the correct parser
     return_code = 0

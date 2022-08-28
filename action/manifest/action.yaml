@@ -1,0 +1,51 @@
+name: "Generate a container guts manifest"
+description: "Discover set of binaries on the PATH in a container"
+inputs:
+  image:
+    description: Container Image
+    required: true
+  outfile:
+    description: Output file (otherwise prints to screen) over-rides outdir
+    required: false
+  outdir:
+    description: Root output directory
+    required: false
+  include:
+    description: List of (space separated) includes to extract
+    required: false
+    default: paths
+
+outputs:
+  outfile:
+    description: "Output file generated"
+    value: ${{ steps.guts_run.outputs.outfile }}
+
+runs:
+  using: "composite"
+  steps:
+   - name: Install Guts
+     run: which guts || pip install git+https://github.com/singularityhub/guts@main
+     shell: bash
+
+   - name: Guts for ${{ inputs.image }}
+     id: guts_run
+     env:
+       image: ${{ inputs.image }} 
+       outfile: ${{ inputs.outfile }} 
+       outdir: ${{ inputs.outdir }} 
+       includes: ${{ inputs.include }}
+     run: | 
+        cmd="guts manifest"
+        if [ "${outfile}" != "" ]; then
+            cmd="${cmd} --outfile ${outfile}"
+        fi
+        if [ "${outdir}" != "" ]; then
+            cmd="${cmd} --outdir ${outdir}"
+        fi
+        for include in ${includes}; do
+            cmd="${cmd} --include ${include}"
+        done
+        cmd="${cmd} ${image}" 
+        printf "${cmd}\n"
+        ${cmd}
+     shell: bash

@@ -3,7 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/container-guts.svg)](https://badge.fury.io/py/container-guts)
 
 Want to know the "guts" inside your container, or more specifically,
-the executables on the PATH inside? 🤓
+the executables on the PATH inside, and filesystem paths? 🤓
 
 ![docs/assets/img/guts-colors-small.png](docs/assets/img/guts-colors-small.png)
 

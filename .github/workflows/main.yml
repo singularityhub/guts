@@ -33,6 +33,7 @@ jobs:
           export PATH="/usr/share/miniconda/bin:$PATH"
           source activate black
           pyflakes container_guts/*.py
+          pyflakes container_guts/client
           pyflakes container_guts/main/client.py
           pyflakes container_guts/main/templates.py
           pyflakes container_guts/main/container/docker.py

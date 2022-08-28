@@ -1,12 +1,7 @@
 name: Generate Container Guts
 on:
   pull_request: []
-  workflow_dispatch: 
-    inputs:
-      docker_uri:
-        description: 'Docker identifier to generate recipe for'
-        required: true
-        default: "quay.io/autamus/clingo:5.5.1"
+
 jobs:
   generate-recipe:
     if: (inputs.docker_uri != '')
@@ -28,10 +23,16 @@ jobs:
           source activate guts
           pip install -e .
 
-      - name: Guts for ${{ inputs.docker_uri }}
-        uses: ./manifest
+      - name: Test Basic Guts
+        uses: ./action/manifest
         with:
-          image: ${{ inputs.docker_uri }}
+          image: "quay.io/autamus/clingo:5.5.1"
+
+      - name: Filesystem Include
+        uses: ./action/manifest
+        with:
+          image: "quay.io/autamus/clingo:5.5.1"
+          include: fs
 
   generate-recipes:
     runs-on: ubuntu-latest
@@ -58,7 +59,7 @@ jobs:
           pip install -e .
 
       - name: Guts for ${{ matrix.image }}
-        uses: ./manifest
+        uses: ./action/manifest
         with:
           image: ${{ matrix.image }}
           outfile: ${{ matrix.image }}.json

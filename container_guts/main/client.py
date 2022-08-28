@@ -73,7 +73,7 @@ class ManifestGenerator:
         """
         print(f"Extracting filesystem at {root}")
         fs = list(utils.recursive_find(root, ".*"))
-        return [x.replace(root, "") for x in fs]
+        return sorted([x.replace(root, "") for x in fs])
 
     @ensure_container
     def run(self, image, includes=None):

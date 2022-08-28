@@ -4,10 +4,7 @@ on:
 
 jobs:
   generate-recipe:
-    if: (inputs.docker_uri != '')
     runs-on: ubuntu-latest
-    permissions:
-      packages: read
     name: ${{ inputs.docker_uri }}
     steps:
       - name: Checkout Repository
@@ -22,6 +19,7 @@ jobs:
           export PATH="/usr/share/miniconda/bin:$PATH"
           source activate guts
           pip install -e .
+          echo "/usr/share/miniconda/bin" >> ${GITHUB_PATH}
 
       - name: Test Basic Guts
         uses: ./action/manifest
@@ -57,6 +55,7 @@ jobs:
           export PATH="/usr/share/miniconda/bin:$PATH"
           source activate guts
           pip install -e .
+          echo "/usr/share/miniconda/bin" >> ${GITHUB_PATH}
 
       - name: Guts for ${{ matrix.image }}
         uses: ./action/manifest

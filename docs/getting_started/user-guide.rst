@@ -38,13 +38,23 @@ to extract all filesystem paths:
 
     $ guts manifest --include fs ubuntu
 
+
+Or to get fs and paths:
+
+.. code-block:: console
+
+    $ guts manifest --include paths --include fs ubuntu --outfile ubuntu-guts.json 
+
+
 This generic "manifest" command is the main entrypoint to extract guts.
 
 ----
 Diff
 ----
 
-A diff takes your container and compares it against a set of base images, 
+**under development**
+
+A diff will take your container and compares it against a set of base images, 
 and only reveals the diff output (the executables in PATH that are special
 to your container). If you don't provide a database (repository or path
 on the filesystem) we use the default at ``singularityhub/shpc-guts``.
@@ -53,6 +63,7 @@ on the filesystem) we use the default at ``singularityhub/shpc-guts``.
 
     $ guts diff vanessa/salad
 
+Note that this command is not officially added yet!
 
 GitHub Action
 -------------

@@ -12,6 +12,9 @@ This is a library and set of GitHub actions to derive that!
 ## Usage
 
 For client and GitHub Actions usage, see our ⭐️ [documentation](https://singularityhub.github.io/guts/) ⭐️
+There are (or will be) scattered examples under [examples](examples), e.g.,
+
+![examples/os_diffs/os-diffs.png](examples/os_diffs/os-diffs.png)
 
 ## TODO
 

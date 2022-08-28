@@ -9,6 +9,8 @@ import shutil
 from .. import utils
 from ..logger import logger
 from .database import Database
+from .container.decorator import ensure_container
+from .container.base import ContainerName
 
 
 class ManifestGenerator:
@@ -26,31 +28,43 @@ class ManifestGenerator:
             logger.exit(f"Container technology {tech} is not supported.")
         self.container = DockerContainer()
 
+    @ensure_container
     def save_path(self, image):
         """
         Derive a save path, if desired.
         """
-        return self.container.save_path(image)
+        return image.path
 
+    def get_container(self, image):
+        """
+        Courtesy function to get a container from a URI.
+        """
+        if isinstance(image, ContainerName):
+            return image
+        return ContainerName(image)
+
+    @ensure_container
     def diff(self, image, database=None):
         """
         Generate a manifest for an image and diff against likely
         """
-        print(f"Generating diff for {image}")
-        tmpdir = self.extract(image, cleanup=False)
-        db = Database(database)
+        raise NotImplementedError
+        # TODO need a way to identify filesystem, likely with unique path properties
+        # print(f"Generating diff for {image}")
+        # tmpdir = self.extract(image, cleanup=False)
+        # db = Database(database)
 
         # TODO need a marker to distinguish
-        print("DIFF")
-        import IPython
+        # print("DIFF")
+        # import IPython
 
-        IPython.embed()
+        # IPython.embed()
 
         # Only cleans up if was cloned
-        db.cleanup()
-        shutil.rmtree(tmpdir, ignore_errors=True)
-        self.container.cleanup(image)
-        return {image: self.manifests[image]}
+        # db.cleanup()
+        # shutil.rmtree(tmpdir, ignore_errors=True)
+        # self.container.cleanup(image)
+        # return {image: self.manifests[image]}
 
     def extract_filesystem(self, root):
         """
@@ -60,6 +74,7 @@ class ManifestGenerator:
         fs = list(utils.recursive_find(root, ".*"))
         return [x.replace(root, "") for x in fs]
 
+    @ensure_container
     def run(self, image, includes=None):
         """
         Run the generator to create a paths manifest.
@@ -67,8 +82,9 @@ class ManifestGenerator:
         print(f"Adding {image} to guts manifest")
         tmpdir = self.extract(image, includes=includes)
         shutil.rmtree(tmpdir, ignore_errors=True)
-        return {image: self.manifests[image]}
+        return {image.uri: self.manifests[image.uri]}
 
+    @ensure_container
     def extract(self, image, cleanup=True, includes=None):
         """
         Given an image, extract the temporary filesystem with metadata
@@ -80,8 +96,8 @@ class ManifestGenerator:
 
         # The manifest generator keeps a record of the image
         print(f"\nSearching {image}")
-        if image not in self.manifests:
-            self.manifests[image] = {}
+        if image.uri not in self.manifests:
+            self.manifests[image.uri] = {}
 
         # Root of filesystem
         root = os.path.join(tmpdir, "root")
@@ -95,7 +111,7 @@ class ManifestGenerator:
             else:
                 logger.warning(f"Data type {include} is not recognized.")
                 continue
-            self.manifests[image][include] = data
+            self.manifests[image.uri][include] = data
         return tmpdir
 
     def explore_paths(self, root, paths):

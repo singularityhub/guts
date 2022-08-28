@@ -39,13 +39,6 @@ class DockerContainer(ContainerTechnology):
         return ContainerName(image)
 
     @ensure_container
-    def save_path(self, image):
-        """
-        Derive a save path, if desired.
-        """
-        return image.path
-
-    @ensure_container
     def cleanup(self, image):
         """
         Stop and remove an image.

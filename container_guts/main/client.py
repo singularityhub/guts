@@ -56,7 +56,13 @@ class ManifestGenerator:
         print(f"Generating diff for {image}")
         tmpdir = self.extract(image, cleanup=False, includes=["paths", "fs"])
         db = Database(database)
-        result = db.diff(self.manifests[image.uri])
+
+        # Catch the error so we clean up the running container
+        try:
+            result = db.diff(self.manifests[image.uri])
+        except:
+            self.container.cleanup(image)
+            return
 
         # Only cleans up if was cloned
         db.cleanup()
@@ -83,6 +89,19 @@ class ManifestGenerator:
         return {image.uri: self.manifests[image.uri]}
 
     @ensure_container
+    def get_environment_paths(self, image):
+        """
+        Get environment paths.
+        """
+        paths = []
+        envs = self.container.execute(image, ["env"])
+        if envs["return_code"] != 0:
+            return
+        for line in envs["message"].split("\n"):
+            paths += self._parse_paths(line)
+        return paths
+
+    @ensure_container
     def extract(self, image, cleanup=True, includes=None):
         """
         Given an image, extract the temporary filesystem with metadata
@@ -91,6 +110,9 @@ class ManifestGenerator:
         includes = includes or ["paths"]
         tmpdir = self.container.export(image, cleanup=cleanup)
         meta = self.get_manifests(os.path.join(tmpdir, "meta"))
+
+        # Get a PATH from the running container
+        [meta["paths"].add(x) for x in self.get_environment_paths(image)]
 
         # The manifest generator keeps a record of the image
         print(f"\nSearching {image}")
@@ -131,6 +153,23 @@ class ManifestGenerator:
             manifest[path] = sorted(list(files))
         return manifest
 
+    def _parse_paths(self, envar):
+        """
+        Parse a string environment variable for paths.
+        """
+        paths = []
+        # Cut out early given empty string
+        if not envar:
+            return paths
+        if "PATH" in envar:
+            print(envar)
+            envar = envar.replace(" ", "").replace("PATH=", "").strip()
+            for path in envar.split(":"):
+                if not path:
+                    continue
+                paths.append(path)
+        return paths
+
     def get_manifests(self, root):
         """
         Given the root of a container extracted meta directory, read all json
@@ -156,11 +195,7 @@ class ManifestGenerator:
 
             # Populate paths
             for envar in cfg.get("Env") or []:
-                if "PATH" in envar:
-                    print(envar)
-                    envar = envar.replace(" ", "").replace("PATH=", "")
-                    for path in envar.split(":"):
-                        manifest["paths"].add(path)
+                [manifest["paths"].add(x) for x in self._parse_paths(envar)]
         return manifest
 
     def __repr__(self):

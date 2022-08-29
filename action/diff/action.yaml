@@ -1,0 +1,50 @@
+name: "Generate a container diff"
+description: "Discover set of special binaries and paths in a container"
+inputs:
+  image:
+    description: Container Image
+    required: true
+  outfile:
+    description: Output file (otherwise prints to screen) over-rides outdir
+    required: false
+  outdir:
+    description: Root output directory
+    required: false
+  database:
+    description: Provide a custom guts database root (with guts results)
+    required: false
+
+outputs:
+  outfile:
+    description: "Output file generated"
+    value: ${{ steps.guts_run.outputs.outfile }}
+
+runs:
+  using: "composite"
+  steps:
+   - name: Install Guts
+     run: which guts || pip install git+https://github.com/singularityhub/guts@main
+     shell: bash
+
+   - name: Guts Diff for ${{ inputs.image }}
+     id: guts_run
+     env:
+       image: ${{ inputs.image }} 
+       outfile: ${{ inputs.outfile }} 
+       outdir: ${{ inputs.outdir }} 
+       database: ${{ inputs.database }} 
+     run: | 
+        cmd="guts diff"
+        if [ "${outfile}" != "" ]; then
+            cmd="${cmd} --outfile ${outfile}"
+        fi
+        if [ "${outdir}" != "" ]; then
+            cmd="${cmd} --outdir ${outdir}"
+        fi
+        if [ "${database}" != "" ]; then
+            cmd="${cmd} --db ${database}"
+        fi
+        cmd="${cmd} ${image}" 
+        printf "${cmd}\n"
+        ${cmd}
+     shell: bash

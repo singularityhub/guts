@@ -34,14 +34,16 @@ class Database:
             print(f"{base_image}: removed {difference} shared paths.")
             count = len(fs)
 
-        paths = sorted({x for v in manifest["paths"].values() for x in v})
+        paths = sorted(
+            {"%s%s%s" % (k, os.sep, x) for k, v in manifest["paths"].items() for x in v}
+        )
 
         # Filter down to thoses in PATH or entrypoint
         return {
-            "unique_paths": list(
-                x for x in fs if x in manifest.get("entrypoint") or x in paths
+            "unique_paths": sorted(
+                list(x for x in fs if x in manifest.get("entrypoint", []) or x in paths)
             ),
-            "unique_fs": list(fs),
+            "unique_fs": sorted(list(fs)),
         }
 
     def set_database(self):

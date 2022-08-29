@@ -34,8 +34,6 @@ jobs:
 
   generate-recipes:
     runs-on: ubuntu-latest
-    permissions:
-      packages: read
     strategy:
       fail-fast: false
       matrix:     
@@ -59,6 +57,37 @@ jobs:
 
       - name: Guts for ${{ matrix.image }}
         uses: ./action/manifest
+        with:
+          image: ${{ matrix.image }}
+          outfile: ${{ matrix.image }}.json
+      - name: View Output
+        run: cat ${{ matrix.image }}.json
+        
+  test-diffs:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:     
+        image: ["vanessa/salad"]
+
+    name: Generate Matrix
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Create conda environment
+        run: conda create --quiet -c conda-forge --name guts
+
+      - uses: actions/checkout@v3
+      - name: Install Guts
+        run: |
+          export PATH="/usr/share/miniconda/bin:$PATH"
+          source activate guts
+          pip install -e .
+          echo "/usr/share/miniconda/bin" >> ${GITHUB_PATH}
+
+      - name: Guts Diff for ${{ matrix.image }}
+        uses: ./action/diff
         with:
           image: ${{ matrix.image }}
           outfile: ${{ matrix.image }}.json

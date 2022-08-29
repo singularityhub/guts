@@ -47,6 +47,7 @@ class DockerContainer(ContainerTechnology):
         self.call(
             [self.command, "rm", "--force", image.container_name], allow_fail=True
         )
+        # TODO should have an arg to keep this (it's annoying to delete)
         self.call([self.command, "rmi", "--force", image.uri], allow_fail=True)
 
     @ensure_container
@@ -92,6 +93,16 @@ class DockerContainer(ContainerTechnology):
         self.call(["tar", "-xf", save, "-C", save_dir])
         return tmpdir
 
+    @ensure_container
+    def execute(self, image, command):
+        """
+        Exec a command to a running container.
+        """
+        cmd = [self.command, "exec", image.container_name] + command
+        print(" ".join(cmd))
+        return self.call(cmd, stream=False)
+
+    @ensure_container
     def run(self, image, command, entrypoint=None, name=None, detached=True):
         """
         Run a container detached, assuming the entrypoint goes to tail /dev/null.
@@ -103,27 +114,30 @@ class DockerContainer(ContainerTechnology):
             cmd += ["--entrypoint", entrypoint]
         if detached:
             cmd.append("-d")
-        cmd.append(image)
+        cmd.append(image.uri)
         cmd += command
         print(" ".join(cmd))
         return self.call(cmd)
 
+    @ensure_container
     def pull(self, image):
         """
         Pull a container by name
         """
-        return self.call([self.command, "pull", image])
+        return self.call([self.command, "pull", image.uri])
 
+    @ensure_container
     def tag(self, image, tag_as):
         """
         Given a container URI, tag as something else.
         """
-        return self.call([self.command, "tag", image, tag_as])
+        return self.call([self.command, "tag", image.uri, tag_as])
 
+    @ensure_container
     def inspect(self, image):
         """
         Inspect an image
         """
-        res = self.call([self.command, "inspect", image], stream=False)
+        res = self.call([self.command, "inspect", image.uri], stream=False)
         raw = res["message"]
         return json.loads(raw)

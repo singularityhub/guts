@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>container_guts.main.container.docker &mdash; Container Guts &#39;Guts&#39; 0.0.13 documentation</title><link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+  <title>container_guts.main.container.docker &mdash; Container Guts &#39;Guts&#39; 0.0.14 documentation</title><link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/sphinx-argparse.css" type="text/css" />
       <link rel="stylesheet" href="../../../../_static/theme.css" type="text/css" />
@@ -27,7 +27,7 @@
             <a href="../../../../index.html" class="icon icon-home"> Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.13
+                0.0.14
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
@@ -122,6 +122,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
             <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="s2">&quot;--force&quot;</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">container_name</span><span class="p">],</span> <span class="n">allow_fail</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">)</span>
+        <span class="c1"># TODO should have an arg to keep this (it&#39;s annoying to delete)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;rmi&quot;</span><span class="p">,</span> <span class="s2">&quot;--force&quot;</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">uri</span><span class="p">],</span> <span class="n">allow_fail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="nd">@ensure_container</span>
@@ -167,7 +168,17 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s2">&quot;tar&quot;</span><span class="p">,</span> <span class="s2">&quot;-xf&quot;</span><span class="p">,</span> <span class="n">save</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">tmpdir</span>
 
-<div class="viewcode-block" id="DockerContainer.run"><a class="viewcode-back" href="../../../../api_reference/container_guts.main.container.html#container_guts.main.container.docker.DockerContainer.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">entrypoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">detached</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="nd">@ensure_container</span>
+    <span class="k">def</span> <span class="nf">execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">command</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Exec a command to a running container.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cmd</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;exec&quot;</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">container_name</span><span class="p">]</span> <span class="o">+</span> <span class="n">command</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="nd">@ensure_container</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="n">entrypoint</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">detached</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Run a container detached, assuming the entrypoint goes to tail /dev/null.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -178,30 +189,33 @@
             <span class="n">cmd</span> <span class="o">+=</span> <span class="p">[</span><span class="s2">&quot;--entrypoint&quot;</span><span class="p">,</span> <span class="n">entrypoint</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">detached</span><span class="p">:</span>
             <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;-d&quot;</span><span class="p">)</span>
-        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">cmd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">uri</span><span class="p">)</span>
         <span class="n">cmd</span> <span class="o">+=</span> <span class="n">command</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">cmd</span><span class="p">))</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">cmd</span><span class="p">)</span>
 
-<div class="viewcode-block" id="DockerContainer.pull"><a class="viewcode-back" href="../../../../api_reference/container_guts.main.container.html#container_guts.main.container.docker.DockerContainer.pull">[docs]</a>    <span class="k">def</span> <span class="nf">pull</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+    <span class="nd">@ensure_container</span>
+    <span class="k">def</span> <span class="nf">pull</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Pull a container by name</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;pull&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;pull&quot;</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">uri</span><span class="p">])</span>
 
-<div class="viewcode-block" id="DockerContainer.tag"><a class="viewcode-back" href="../../../../api_reference/container_guts.main.container.html#container_guts.main.container.docker.DockerContainer.tag">[docs]</a>    <span class="k">def</span> <span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">tag_as</span><span class="p">):</span>
+    <span class="nd">@ensure_container</span>
+    <span class="k">def</span> <span class="nf">tag</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">tag_as</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Given a container URI, tag as something else.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">,</span> <span class="n">tag_as</span><span class="p">])</span></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;tag&quot;</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">uri</span><span class="p">,</span> <span class="n">tag_as</span><span class="p">])</span>
 
-<div class="viewcode-block" id="DockerContainer.inspect"><a class="viewcode-back" href="../../../../api_reference/container_guts.main.container.html#container_guts.main.container.docker.DockerContainer.inspect">[docs]</a>    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
+    <span class="nd">@ensure_container</span>
+    <span class="k">def</span> <span class="nf">inspect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Inspect an image</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;inspect&quot;</span><span class="p">,</span> <span class="n">image</span><span class="p">],</span> <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">res</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span> <span class="s2">&quot;inspect&quot;</span><span class="p">,</span> <span class="n">image</span><span class="o">.</span><span class="n">uri</span><span class="p">],</span> <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">raw</span> <span class="o">=</span> <span class="n">res</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span></div></div>
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span></div>
 </pre></div>
 
            </div>

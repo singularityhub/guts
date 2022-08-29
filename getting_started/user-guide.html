@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Guide &mdash; Container Guts &#39;Guts&#39; 0.0.13 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>User Guide &mdash; Container Guts &#39;Guts&#39; 0.0.14 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
       <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
@@ -29,7 +29,7 @@
             <a href="../index.html" class="icon icon-home"> Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.13
+                0.0.14
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -221,7 +221,6 @@ env:</p>
 </div>
 <div class="section" id="id1">
 <h5>Diff<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h5>
-<p><strong>not developed yet but coming soon!</strong></p>
 <p>The core functionality of guts is to discover new or interesting things in
 the PATH, and this is the goal of diff. You can provide a guts root
 path with your custom guts (e.g., the content of <a class="reference external" href="https://github.com/singularityhub/shpc-guts">shpc-guts</a>
@@ -250,7 +249,15 @@ base images nightly.</p>
 <span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">cat ${{ steps.guts.outputs.outfile }}</span><span class="w"></span>
 </pre></div>
 </div>
-<p>Note that by default guts will be installed for you, unless you install a custom
+<p>The above would be the same as doing:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Diff for ${{ matrix.image }}</span><span class="w"></span>
+<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">singularityhub/guts/action/diff@main</span><span class="w"></span>
+<span class="w">  </span><span class="nt">with</span><span class="p">:</span><span class="w"></span>
+<span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ matrix.image }}</span><span class="w"></span>
+<span class="w">    </span><span class="nt">database</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/singularityhub/shpc-guts</span><span class="w"></span>
+</pre></div>
+</div>
+<p>Note that for all of the above, by default guts will be installed for you, unless you install a custom
 version in a previous step.</p>
 </div>
 </div>

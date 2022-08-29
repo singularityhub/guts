@@ -68,7 +68,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:     
-        image: ["vanessa/salad"]
+        image: [["vanessa/salad", "vanessa-salad.json"]]
 
     name: Generate Matrix
     steps:
@@ -86,10 +86,10 @@ jobs:
           pip install -e .
           echo "/usr/share/miniconda/bin" >> ${GITHUB_PATH}
 
-      - name: Guts Diff for ${{ matrix.image }}
+      - name: Guts Diff for ${{ matrix.image[0] }}
         uses: ./action/diff
         with:
-          image: ${{ matrix.image }}
-          outfile: ${{ matrix.image }}.json
+          image: ${{ matrix.image[0] }}
+          outfile: ${{ matrix.image[1] }}
       - name: View Output
-        run: cat ${{ matrix.image }}.json
+        run: cat ${{ matrix.image[1] }}

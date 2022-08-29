@@ -23,6 +23,19 @@ def get_installdir():
     return os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
+def get_userhome():
+    """
+    Get the user home based on the effective uid.
+    """
+    try:
+        import pwd
+
+        return pwd.getpwuid(os.getuid())[5]
+    except:
+        # Fallback to envar for Windows, etc.
+        return os.environ.get("HOME")
+
+
 def run_command(cmd, sudo=False, stream=False):
     """
     run_command uses subprocess to send a command to the terminal.

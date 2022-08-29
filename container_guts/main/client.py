@@ -9,12 +9,16 @@ import shutil
 from .. import utils
 from ..logger import logger
 
-# from .database import Database
+from .database import Database
 from .container.decorator import ensure_container
 from .container.base import ContainerName
 
 
 class ManifestGenerator:
+    """
+    Generate a Guts manifest.
+    """
+
     def __init__(self, tech="docker"):
         self.init_container_tech(tech)
         self.manifests = {}
@@ -49,23 +53,22 @@ class ManifestGenerator:
         """
         Generate a manifest for an image and diff against likely
         """
-        raise NotImplementedError
-        # TODO need a way to identify filesystem, likely with unique path properties
-        # print(f"Generating diff for {image}")
-        # tmpdir = self.extract(image, cleanup=False)
-        # db = Database(database)
+        print(f"Generating diff for {image}")
+        tmpdir = self.extract(image, cleanup=False, includes=["paths", "fs"])
+        db = Database(database)
 
-        # TODO need a marker to distinguish
-        # print("DIFF")
-        # import IPython
-
-        # IPython.embed()
+        # Catch the error so we clean up the running container
+        try:
+            result = db.diff(self.manifests[image.uri])
+        except:
+            self.container.cleanup(image)
+            return
 
         # Only cleans up if was cloned
-        # db.cleanup()
-        # shutil.rmtree(tmpdir, ignore_errors=True)
-        # self.container.cleanup(image)
-        # return {image: self.manifests[image]}
+        db.cleanup()
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        self.container.cleanup(image)
+        return {image.uri: {"diff": result}}
 
     def extract_filesystem(self, root):
         """
@@ -86,14 +89,32 @@ class ManifestGenerator:
         return {image.uri: self.manifests[image.uri]}
 
     @ensure_container
+    def get_environment_paths(self, image):
+        """
+        Get environment paths.
+        """
+        paths = []
+        envs = self.container.execute(image, ["env"])
+        if envs["return_code"] != 0:
+            return
+        for line in envs["message"].split("\n"):
+            paths += self._parse_paths(line)
+        return paths
+
+    @ensure_container
     def extract(self, image, cleanup=True, includes=None):
         """
         Given an image, extract the temporary filesystem with metadata
         """
         # By default, include paths
         includes = includes or ["paths"]
-        tmpdir = self.container.export(image, cleanup=cleanup)
+        tmpdir = self.container.export(image, cleanup=False)
         meta = self.get_manifests(os.path.join(tmpdir, "meta"))
+
+        # Get a PATH from the running container
+        [meta["paths"].add(x) for x in self.get_environment_paths(image)]
+        if cleanup:
+            self.container.cleanup(image)
 
         # The manifest generator keeps a record of the image
         print(f"\nSearching {image}")
@@ -113,6 +134,11 @@ class ManifestGenerator:
                 logger.warning(f"Data type {include} is not recognized.")
                 continue
             self.manifests[image.uri][include] = data
+
+        for attr in ["entrypoint", "cmd", "workingdir", "labels"]:
+            if attr in meta:
+                self.manifests[image.uri][attr] = meta[attr]
+
         return tmpdir
 
     def explore_paths(self, root, paths):
@@ -129,6 +155,23 @@ class ManifestGenerator:
             manifest[path] = sorted(list(files))
         return manifest
 
+    def _parse_paths(self, envar):
+        """
+        Parse a string environment variable for paths.
+        """
+        paths = []
+        # Cut out early given empty string
+        if not envar:
+            return paths
+        if "PATH" in envar:
+            print(envar)
+            envar = envar.replace(" ", "").replace("PATH=", "").strip()
+            for path in envar.split(":"):
+                if not path:
+                    continue
+                paths.append(path)
+        return paths
+
     def get_manifests(self, root):
         """
         Given the root of a container extracted meta directory, read all json
@@ -136,23 +179,25 @@ class ManifestGenerator:
         """
         manifest = {"paths": set()}
         for jsonfile in utils.recursive_find(root, "json$"):
+            data = utils.read_json(jsonfile)
             if "manifest" in jsonfile:
+
                 continue
             print("Found layer config %s" % jsonfile)
-            data = utils.read_json(jsonfile)
 
             # Fallback to config
             cfg = data.get("container_config") or data.get("config")
             if not cfg:
                 continue
 
+            # Get entrypoint, command, labels
+            for attr in ["Entrypoint", "Cmd", "WorkingDir", "Labels"]:
+                if cfg.get(attr) and attr.lower() not in manifest:
+                    manifest[attr.lower()] = cfg[attr]
+
             # Populate paths
             for envar in cfg.get("Env") or []:
-                if "PATH" in envar:
-                    print(envar)
-                    envar = envar.replace(" ", "").replace("PATH=", "")
-                    for path in envar.split(":"):
-                        manifest["paths"].add(path)
+                [manifest["paths"].add(x) for x in self._parse_paths(envar)]
         return manifest
 
     def __repr__(self):

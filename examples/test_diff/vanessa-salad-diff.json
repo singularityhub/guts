@@ -1,0 +1,12 @@
+{
+    "docker.io/vanessa/salad:latest": {
+        "diff": {
+            "unique_paths": [
+                "/code/salad"
+            ],
+            "unique_fs": [
+                "/code/salad"
+            ]
+        }
+    }
+}

@@ -108,11 +108,13 @@ class ManifestGenerator:
         """
         # By default, include paths
         includes = includes or ["paths"]
-        tmpdir = self.container.export(image, cleanup=cleanup)
+        tmpdir = self.container.export(image, cleanup=False)
         meta = self.get_manifests(os.path.join(tmpdir, "meta"))
 
         # Get a PATH from the running container
         [meta["paths"].add(x) for x in self.get_environment_paths(image)]
+        if cleanup:
+            self.container.cleanup(image)
 
         # The manifest generator keeps a record of the image
         print(f"\nSearching {image}")

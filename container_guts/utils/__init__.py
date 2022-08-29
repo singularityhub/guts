@@ -19,5 +19,6 @@ from .terminal import (
     confirm_action,
     ensure_no_extra,
     get_installdir,
+    get_userhome,
     run_command,
 )

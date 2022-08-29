@@ -19,9 +19,6 @@ def main(args, parser, extra, subparser):
     print("container tech: %s" % args.container_tech)
     print("      database: %s" % args.database)
 
-    print("This command is not fully implemented yet, come back soon!")
-    sys.exit()
-
     # Derive an initial manifest
     cli = ManifestGenerator(tech=args.container_tech)
     manifests = cli.diff(args.image, database=args.database)

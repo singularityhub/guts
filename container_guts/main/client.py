@@ -9,12 +9,16 @@ import shutil
 from .. import utils
 from ..logger import logger
 
-# from .database import Database
+from .database import Database
 from .container.decorator import ensure_container
 from .container.base import ContainerName
 
 
 class ManifestGenerator:
+    """
+    Generate a Guts manifest.
+    """
+
     def __init__(self, tech="docker"):
         self.init_container_tech(tech)
         self.manifests = {}
@@ -49,23 +53,16 @@ class ManifestGenerator:
         """
         Generate a manifest for an image and diff against likely
         """
-        raise NotImplementedError
-        # TODO need a way to identify filesystem, likely with unique path properties
-        # print(f"Generating diff for {image}")
-        # tmpdir = self.extract(image, cleanup=False)
-        # db = Database(database)
-
-        # TODO need a marker to distinguish
-        # print("DIFF")
-        # import IPython
-
-        # IPython.embed()
+        print(f"Generating diff for {image}")
+        tmpdir = self.extract(image, cleanup=False, includes=["paths", "fs"])
+        db = Database(database)
+        result = db.diff(self.manifests[image.uri])
 
         # Only cleans up if was cloned
-        # db.cleanup()
-        # shutil.rmtree(tmpdir, ignore_errors=True)
-        # self.container.cleanup(image)
-        # return {image: self.manifests[image]}
+        db.cleanup()
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        self.container.cleanup(image)
+        return {image.uri: {"diff": result}}
 
     def extract_filesystem(self, root):
         """
@@ -113,6 +110,11 @@ class ManifestGenerator:
                 logger.warning(f"Data type {include} is not recognized.")
                 continue
             self.manifests[image.uri][include] = data
+
+        for attr in ["entrypoint", "cmd", "workingdir", "labels"]:
+            if attr in meta:
+                self.manifests[image.uri][attr] = meta[attr]
+
         return tmpdir
 
     def explore_paths(self, root, paths):
@@ -136,15 +138,21 @@ class ManifestGenerator:
         """
         manifest = {"paths": set()}
         for jsonfile in utils.recursive_find(root, "json$"):
+            data = utils.read_json(jsonfile)
             if "manifest" in jsonfile:
+
                 continue
             print("Found layer config %s" % jsonfile)
-            data = utils.read_json(jsonfile)
 
             # Fallback to config
             cfg = data.get("container_config") or data.get("config")
             if not cfg:
                 continue
+
+            # Get entrypoint, command, labels
+            for attr in ["Entrypoint", "Cmd", "WorkingDir", "Labels"]:
+                if cfg.get(attr) and attr.lower() not in manifest:
+                    manifest[attr.lower()] = cfg[attr]
 
             # Populate paths
             for envar in cfg.get("Env") or []:

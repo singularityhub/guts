@@ -17,6 +17,33 @@ class Database:
         self.do_cleanup = False
         self.set_database()
 
+    def diff(self, manifest):
+        """
+        Do a diff of the image against the database.
+
+        This is fairly stupid, but I found it works well to just subtract all
+        the base images, and meaningful added stuff is left.
+        """
+        fs = set(manifest["fs"])
+        count = len(fs)
+        for data in self.iter_containers():
+            base_image = list(data.keys())[0]
+            base_fs = set(list(data.values())[0]["fs"])
+            fs = fs.difference(base_fs)
+            difference = count - len(fs)
+            print(f"{base_image}: removed {difference} shared paths.")
+            count = len(fs)
+
+        paths = sorted({x for v in manifest["paths"].values() for x in v})
+
+        # Filter down to thoses in PATH or entrypoint
+        return {
+            "unique_paths": list(
+                x for x in fs if x in manifest.get("entrypoint") or x in paths
+            ),
+            "unique_fs": list(fs),
+        }
+
     def set_database(self):
         """
         Ensure we have a database on the local filesystem.
@@ -28,19 +55,6 @@ class Database:
         # Remote - clone to make local
         if "http" in self.source:
             self.db = self.clone()
-
-    def exists(self, name):
-        """
-        Determine if a base image entry exists.
-        """
-        print("EXISTS")
-        import IPython
-
-        IPython.embed()
-        dirname = self.source
-        if self.subdir:
-            dirname = os.path.join(dirname, self.subdir)
-        return os.path.exists(os.path.join(dirname, name))
 
     def cleanup(self):
         if self.do_cleanup and os.path.exists(self.db):
@@ -65,5 +79,5 @@ class Database:
         """
         yield container files
         """
-        for filename in utils.recursive_find(self.db, "*json"):
-            yield filename
+        for filename in utils.recursive_find(self.db, "[.]json"):
+            yield utils.read_json(filename)

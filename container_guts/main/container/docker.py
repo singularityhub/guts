@@ -89,20 +89,14 @@ class DockerContainer(ContainerTechnology):
 
         for dirname in save_dir, export_dir:
             os.makedirs(dirname)
-        self.call(
-            [
-                "tar",
-                "-xf",
-                export,
-                "--exclude=/dev",
-                "--exclude=/dev/*",
-                "-C",
-                export_dir,
-            ]
-        )
-        self.call(
-            ["tar", "-xf", save, "--exclude=/dev", "--exclude=/dev/*", "-C", save_dir]
-        )
+
+        try:
+            self.call(["tar", "-xf", "--ignore-failed-read", export, "-C", export_dir])
+            self.call(["tar", "-xf", "--ignore-failed-read", save, "-C", save_dir])
+        except:
+            self.call(["tar", "-xf", export, "-C", export_dir])
+            self.call(["tar", "-xf", save, "-C", save_dir])
+
         return tmpdir
 
     @ensure_container

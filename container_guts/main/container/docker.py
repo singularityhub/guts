@@ -91,8 +91,8 @@ class DockerContainer(ContainerTechnology):
             os.makedirs(dirname)
 
         try:
-            self.call(["tar", "-xf", "--ignore-failed-read", export, "-C", export_dir])
-            self.call(["tar", "-xf", "--ignore-failed-read", save, "-C", save_dir])
+            self.call(["tar", "--ignore-failed-read", "-xf", export, "-C", export_dir])
+            self.call(["tar", "--ignore-failed-read", "-xf", save, "-C", save_dir])
         except:
             self.call(["tar", "-xf", export, "-C", export_dir])
             self.call(["tar", "-xf", save, "-C", save_dir])

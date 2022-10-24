@@ -164,8 +164,20 @@
 
         <span class="k">for</span> <span class="n">dirname</span> <span class="ow">in</span> <span class="n">save_dir</span><span class="p">,</span> <span class="n">export_dir</span><span class="p">:</span>
             <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">dirname</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s2">&quot;tar&quot;</span><span class="p">,</span> <span class="s2">&quot;--exclude=/dev&quot;</span><span class="p">,</span> <span class="s2">&quot;-xf&quot;</span><span class="p">,</span> <span class="n">export</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="n">export_dir</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s2">&quot;tar&quot;</span><span class="p">,</span> <span class="s2">&quot;--exclude=/dev&quot;</span><span class="p">,</span> <span class="s2">&quot;-xf&quot;</span><span class="p">,</span> <span class="n">save</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="s2">&quot;tar&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;-xf&quot;</span><span class="p">,</span>
+                <span class="n">export</span><span class="p">,</span>
+                <span class="s2">&quot;--exclude=/dev&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;--exclude=/dev/*&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;-C&quot;</span><span class="p">,</span>
+                <span class="n">export_dir</span><span class="p">,</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span>
+            <span class="p">[</span><span class="s2">&quot;tar&quot;</span><span class="p">,</span> <span class="s2">&quot;-xf&quot;</span><span class="p">,</span> <span class="n">save</span><span class="p">,</span> <span class="s2">&quot;--exclude=/dev&quot;</span><span class="p">,</span> <span class="s2">&quot;--exclude=/dev/*&quot;</span><span class="p">,</span> <span class="s2">&quot;-C&quot;</span><span class="p">,</span> <span class="n">save_dir</span><span class="p">]</span>
+        <span class="p">)</span>
         <span class="k">return</span> <span class="n">tmpdir</span>
 
     <span class="nd">@ensure_container</span>

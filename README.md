@@ -1,6 +1,8 @@
 # Container Guts!
 
 [![PyPI version](https://badge.fury.io/py/container-guts.svg)](https://badge.fury.io/py/container-guts)
+[![DOI](https://zenodo.org/badge/529092526.svg)](https://zenodo.org/badge/latestdoi/529092526)
+
 
 Want to know the "guts" inside your container, or more specifically,
 the executables on the PATH inside, and filesystem paths? 🤓

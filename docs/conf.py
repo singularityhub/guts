@@ -37,7 +37,6 @@ extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.mathjax",
     "sphinx.ext.viewcode",
-    "sphinxcontrib.napoleon",
     "sphinxarg.ext",
     "sphinx.ext.autosectionlabel",
 ]
@@ -59,7 +58,7 @@ master_doc = "index"
 
 # General information about the project.
 project = "Container Guts 'Guts'"
-copyright = "2022, Vanessa Sochat"
+copyright = "2022-2023, Vanessa Sochat"
 
 from container_guts import version
 

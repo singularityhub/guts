@@ -1,19 +1,21 @@
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" >
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>container_guts.utils.fileio &mdash; Container Guts &#39;Guts&#39; 0.0.15 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <title>container_guts.utils.fileio &mdash; Container Guts &#39;Guts&#39; 0.0.15 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/sphinx-argparse.css" type="text/css" />
       <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
-  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/jquery.js"></script>
-        <script src="../../../_static/underscore.js"></script>
+  
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
         <script src="../../../_static/doctools.js"></script>
+        <script src="../../../_static/sphinx_highlight.js"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -24,25 +26,29 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../../../index.html" class="icon icon-home"> Container Guts 'Guts'
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            Container Guts 'Guts'
           </a>
               <div class="version">
                 0.0.15
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption"><span class="caption-text">Getting started</span></p>
+              <p class="caption" role="heading"><span class="caption-text">Getting started</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../getting_started/user-guide.html">User Guide</a></li>
 </ul>
-<p class="caption"><span class="caption-text">API Reference</span></p>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_reference/container_guts.html">container_guts package</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../api_reference/modules.html">container_guts</a></li>
@@ -61,9 +67,9 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
-          <li><a href="../../index.html">Module code</a> &raquo;</li>
-      <li>container_guts.utils.fileio</li>
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">container_guts.utils.fileio</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -90,7 +96,7 @@
 
 
 <div class="viewcode-block" id="can_be_deleted"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.can_be_deleted">[docs]</a><span class="k">def</span> <span class="nf">can_be_deleted</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">ignore_files</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A path can be deleted if it contains no entries, *or*</span>
 <span class="sd">    if the only files are in ignore_files</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -105,7 +111,7 @@
 
 
 <div class="viewcode-block" id="creation_date"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.creation_date">[docs]</a><span class="k">def</span> <span class="nf">creation_date</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the creation date, and fallback to modified date.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">stat</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
@@ -116,7 +122,7 @@
 
 
 <div class="viewcode-block" id="mkdirp"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.mkdirp">[docs]</a><span class="k">def</span> <span class="nf">mkdirp</span><span class="p">(</span><span class="n">dirnames</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create one or more directories</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">dirname</span> <span class="ow">in</span> <span class="n">dirnames</span><span class="p">:</span>
@@ -124,7 +130,7 @@
 
 
 <div class="viewcode-block" id="mkdir_p"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.mkdir_p">[docs]</a><span class="k">def</span> <span class="nf">mkdir_p</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Make a directory path if it does not exist, akin to mkdir -p</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -137,7 +143,7 @@
 
 
 <div class="viewcode-block" id="remove_to_base"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.remove_to_base">[docs]</a><span class="k">def</span> <span class="nf">remove_to_base</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">base_path</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Delete the tree under $path and all the parents</span>
 <span class="sd">    up to $base_path as long as they are empty</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -161,7 +167,7 @@
 
 
 <div class="viewcode-block" id="get_tmpfile"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.get_tmpfile">[docs]</a><span class="k">def</span> <span class="nf">get_tmpfile</span><span class="p">(</span><span class="n">tmpdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get a temporary file with an optional prefix.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -179,7 +185,7 @@
 
 
 <div class="viewcode-block" id="get_tmpdir"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.get_tmpdir">[docs]</a><span class="k">def</span> <span class="nf">get_tmpdir</span><span class="p">(</span><span class="n">tmpdir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">create</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get a temporary directory for an operation.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">tmpdir</span> <span class="o">=</span> <span class="n">tmpdir</span> <span class="ow">or</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">gettempdir</span><span class="p">()</span>
@@ -194,7 +200,7 @@
 
 
 <div class="viewcode-block" id="recursive_find"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.recursive_find">[docs]</a><span class="k">def</span> <span class="nf">recursive_find</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Find filenames that match a particular pattern, and yield them.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># We can identify modules by finding module.lua</span>
@@ -208,7 +214,7 @@
 
 
 <div class="viewcode-block" id="get_file_hash"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.get_file_hash">[docs]</a><span class="k">def</span> <span class="nf">get_file_hash</span><span class="p">(</span><span class="n">image_path</span><span class="p">,</span> <span class="n">algorithm</span><span class="o">=</span><span class="s2">&quot;sha256&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Return an sha256 hash of the file based on a criteria level.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">try</span><span class="p">:</span>
@@ -224,7 +230,7 @@
 
 
 <div class="viewcode-block" id="copyfile"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.copyfile">[docs]</a><span class="k">def</span> <span class="nf">copyfile</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Copy a file from a source to its destination.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Case 1: It&#39;s already there, we aren&#39;t replacing it :)</span>
@@ -240,7 +246,7 @@
 
 
 <div class="viewcode-block" id="write_file"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.write_file">[docs]</a><span class="k">def</span> <span class="nf">write_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">content</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">exec</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Write content to a filename</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">filey</span><span class="p">:</span>
@@ -254,7 +260,7 @@
 
 
 <div class="viewcode-block" id="write_json"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.write_json">[docs]</a><span class="k">def</span> <span class="nf">write_json</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Write json to a filename</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">filey</span><span class="p">:</span>
@@ -263,14 +269,14 @@
 
 
 <div class="viewcode-block" id="print_json"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.print_json">[docs]</a><span class="k">def</span> <span class="nf">print_json</span><span class="p">(</span><span class="n">json_obj</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Print json pretty</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_obj</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">separators</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">,</span> <span class="s2">&quot;: &quot;</span><span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="read_file"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.read_file">[docs]</a><span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read a file.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span> <span class="k">as</span> <span class="n">filey</span><span class="p">:</span>
@@ -279,7 +285,7 @@
 
 
 <div class="viewcode-block" id="read_json"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.fileio.read_json">[docs]</a><span class="k">def</span> <span class="nf">read_json</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Read a json file to a dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">read_file</span><span class="p">(</span><span class="n">filename</span><span class="p">))</span></div>
@@ -292,7 +298,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2022, Vanessa Sochat.</p>
+    <p>&#169; Copyright 2022-2023, Vanessa Sochat.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

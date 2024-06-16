@@ -63,12 +63,6 @@ def get_parser():
         description="take a diff of your container against a guts database.",
         formatter_class=argparse.RawTextHelpFormatter,
     )
-    diff.add_argument(
-        "--db",
-        "--database",
-        help="Database root (of json files) to use, either filesystem or git URL to clone",
-        dest="database",
-    )
     similar = subparsers.add_parser(
         "similar",
         description="calculate similarity of your container against a guts database.",

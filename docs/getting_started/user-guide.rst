@@ -48,11 +48,23 @@ Or to get fs and paths:
 
 This generic "manifest" command is the main entrypoint to extract guts.
 
+-------
+Similar
+-------
+
+This command calculates a similarity comparison between your container and the database
+of base images we maintain with shpc. We do this based on filesystem paths. We first remove
+all paths that are unique to your image, and then with what is left, we calculate the intersection
+over the total filesystem paths left in your image, which is saying "The percentage of non-unique
+paths that are shared between your image and the contender base."
+
+.. code-block:: console
+
+    $ guts similar vanessa/salad
+
 ----
 Diff
 ----
-
-**under development**
 
 A diff will take your container and compares it against a set of base images,
 and only reveals the diff output (the executables in PATH that are special
@@ -63,7 +75,6 @@ on the filesystem) we use the default at ``singularityhub/shpc-guts``.
 
     $ guts diff vanessa/salad
 
-Note that this command is not officially added yet!
 
 GitHub Action
 -------------

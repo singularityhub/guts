@@ -1,15 +1,13 @@
 #!/usr/bin/env python3
 
 import argparse
-import pandas
 import json
 import os
 import re
-import shutil
 import sys
-import tempfile
 
 import matplotlib.pyplot as plt
+import pandas
 import seaborn as sns
 
 sns.set_theme(style="white")
@@ -46,7 +44,7 @@ def plot_heatmap(df, save_tos=None):
     cmap = sns.diverging_palette(230, 3, as_cmap=True)
 
     # Draw the heatmap with the mask and correct aspect ratio
-    p = sns.heatmap(df, linewidths=0.5, cbar=False, cmap=cmap)
+    sns.heatmap(df, linewidths=0.5, cbar=False, cmap=cmap)
     # used for heatmap
     # p.tick_params(labelsize=5)
     plt.tight_layout()
@@ -77,7 +75,7 @@ class ContainerDiffer:
             x.replace(self.database, "").strip("/").replace(".json", ""): x
             for x in bases
         }
-        df = pandas.DataFrame(columns=list(names), index=list(names), data=0)
+        # df = pandas.DataFrame(columns=list(names), index=list(names), data=0)
         uniques = {name: set() for name in names}
         for A in names:
             Apaths = self.read_fs(names[A])
@@ -165,7 +163,6 @@ def recursive_find(base, pattern=None):
 
 
 def main():
-
     parser = get_parser()
 
     # If an error occurs while parsing the arguments, the interpreter will exit with value 2

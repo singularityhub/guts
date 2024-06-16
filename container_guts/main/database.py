@@ -1,5 +1,5 @@
 __author__ = "Vanessa Sochat"
-__copyright__ = "Copyright 2022, Vanessa Sochat"
+__copyright__ = "Copyright 2024, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
@@ -8,6 +8,7 @@ import shutil
 import subprocess as sp
 
 import container_guts.utils as utils
+
 from ..defaults import database as default_database
 
 
@@ -45,6 +46,40 @@ class Database:
             ),
             "unique_fs": sorted(list(fs)),
         }
+
+    def similar(self, manifest):
+        """
+        Find similar images against the database.
+        """
+        # Get and subtract all paths that are unique to the image
+        diff = self.diff(manifest)
+
+        # This is the image, minus all unique / different paths
+        fs = {x for x in manifest["fs"] if x not in diff["unique_fs"]}
+
+        scores = {}
+        count = len(fs)
+        top_score = None
+        most_similar_image = None
+        for data in self.iter_containers():
+            base_image = list(data.keys())[0]
+            base_fs = set(list(data.values())[0]["fs"])
+            # Total that are in common / total
+            intersection = fs.intersection(base_fs)
+            score = len(intersection) / count
+            if top_score is None or score > top_score:
+                top_score = score
+                most_similar_image = base_image
+            scores[base_image] = {
+                "intersection_div_total_score": score,
+                "intersection": len(intersection),
+                "total_non_unique_image": count,
+                "base_image": base_image,
+            }
+
+        # Add the most similar image
+        scores["most_similar"] = {"base_image": most_similar_image, "score": top_score}
+        return scores
 
     def set_database(self):
         """

@@ -1,10 +1,11 @@
 __author__ = "Vanessa Sochat"
-__copyright__ = "Copyright 2021-2022, Vanessa Sochat"
+__copyright__ = "Copyright 2021-2024, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
 import os
 from subprocess import PIPE, STDOUT, Popen
+
 from container_guts.logger import logger
 
 
@@ -31,7 +32,7 @@ def get_userhome():
         import pwd
 
         return pwd.getpwuid(os.getuid())[5]
-    except:
+    except Exception:
         # Fallback to envar for Windows, etc.
         return os.environ.get("HOME")
 

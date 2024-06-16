@@ -29,11 +29,11 @@ runs:
    - name: Guts Diff for ${{ inputs.image }}
      id: guts_run
      env:
-       image: ${{ inputs.image }} 
-       outfile: ${{ inputs.outfile }} 
-       outdir: ${{ inputs.outdir }} 
-       database: ${{ inputs.database }} 
-     run: | 
+       image: ${{ inputs.image }}
+       outfile: ${{ inputs.outfile }}
+       outdir: ${{ inputs.outdir }}
+       database: ${{ inputs.database }}
+     run: |
         cmd="guts diff"
         if [ "${outfile}" != "" ]; then
             cmd="${cmd} --outfile ${outfile}"
@@ -44,7 +44,7 @@ runs:
         if [ "${database}" != "" ]; then
             cmd="${cmd} --db ${database}"
         fi
-        cmd="${cmd} ${image}" 
+        cmd="${cmd} ${image}"
         printf "${cmd}\n"
         ${cmd}
      shell: bash

@@ -1,5 +1,5 @@
 __author__ = "Vanessa Sochat"
-__copyright__ = "Copyright 2021-2022, Vanessa Sochat"
+__copyright__ = "Copyright 2021-2024, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
@@ -8,10 +8,9 @@ import shutil
 
 from .. import utils
 from ..logger import logger
-
-from .database import Database
-from .container.decorator import ensure_container
 from .container.base import ContainerName
+from .container.decorator import ensure_container
+from .database import Database
 
 
 class ManifestGenerator:
@@ -60,7 +59,7 @@ class ManifestGenerator:
         # Catch the error so we clean up the running container
         try:
             result = db.diff(self.manifests[image.uri])
-        except:
+        except Exception:
             self.container.cleanup(image)
             return
 
@@ -69,6 +68,28 @@ class ManifestGenerator:
         shutil.rmtree(tmpdir, ignore_errors=True)
         self.container.cleanup(image)
         return {image.uri: {"diff": result}}
+
+    @ensure_container
+    def similar(self, image, database=None):
+        """
+        Generate a manifest for an image and similarity scores
+        """
+        print(f"Generating similarity for {image}")
+        tmpdir = self.extract(image, cleanup=False, includes=["paths", "fs"])
+        db = Database(database)
+
+        # Catch the error so we clean up the running container
+        try:
+            result = db.similar(self.manifests[image.uri])
+        except Exception:
+            self.container.cleanup(image)
+            return
+
+        # Only cleans up if was cloned
+        db.cleanup()
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        self.container.cleanup(image)
+        return {image.uri: {"similar": result}}
 
     def extract_filesystem(self, root):
         """
@@ -181,7 +202,6 @@ class ManifestGenerator:
         for jsonfile in utils.recursive_find(root, "json$"):
             data = utils.read_json(jsonfile)
             if "manifest" in jsonfile:
-
                 continue
             print("Found layer config %s" % jsonfile)
 

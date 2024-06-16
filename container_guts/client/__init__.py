@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 __author__ = "Vanessa Sochat"
-__copyright__ = "Copyright 2021-2022, Vanessa Sochat"
+__copyright__ = "Copyright 2021-2024, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 import argparse
@@ -69,8 +69,20 @@ def get_parser():
         help="Database root (of json files) to use, either filesystem or git URL to clone",
         dest="database",
     )
+    similar = subparsers.add_parser(
+        "similar",
+        description="calculate similarity of your container against a guts database.",
+        formatter_class=argparse.RawTextHelpFormatter,
+    )
+    for command in [diff, similar]:
+        command.add_argument(
+            "--db",
+            "--database",
+            help="Database root (of json files) to use, either filesystem or git URL to clone",
+            dest="database",
+        )
 
-    for command in manifest, diff:
+    for command in manifest, diff, similar:
         command.add_argument(
             "-i",
             "--include",
@@ -159,6 +171,8 @@ def run():
         from .manifest import main
     elif args.command == "diff":
         from .diff import main
+    elif args.command == "similar":
+        from .similar import main
 
     # Pass on to the correct parser
     return_code = 0

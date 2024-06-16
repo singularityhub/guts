@@ -1,5 +1,5 @@
 __author__ = "Vanessa Sochat"
-__copyright__ = "Copyright 2022, Vanessa Sochat"
+__copyright__ = "Copyright 2022-2024, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 
@@ -8,9 +8,9 @@ import os
 import sys
 
 import container_guts.utils as utils
-from .decorator import ensure_container
 
-from .base import ContainerTechnology, ContainerName
+from .base import ContainerName, ContainerTechnology
+from .decorator import ensure_container
 
 
 class DockerContainer(ContainerTechnology):
@@ -93,7 +93,7 @@ class DockerContainer(ContainerTechnology):
         try:
             self.call(["tar", "--ignore-failed-read", "-xf", export, "-C", export_dir])
             self.call(["tar", "--ignore-failed-read", "-xf", save, "-C", save_dir])
-        except:
+        except Exception:
             self.call(["tar", "-xf", export, "-C", export_dir])
             self.call(["tar", "-xf", save, "-C", save_dir])
 

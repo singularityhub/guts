@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:     
+      matrix:
         image: ["ubuntu", "centos", "rockylinux:9.0", "alpine", "busybox"]
 
     name: Generate Matrix
@@ -62,12 +62,12 @@ jobs:
           outfile: ${{ matrix.image }}.json
       - name: View Output
         run: cat ${{ matrix.image }}.json
-        
+
   test-diffs:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
-      matrix:     
+      matrix:
         image: [["vanessa/salad", "vanessa-salad.json"]]
 
     name: Generate Matrix

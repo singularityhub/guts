@@ -30,11 +30,11 @@ runs:
    - name: Guts for ${{ inputs.image }}
      id: guts_run
      env:
-       image: ${{ inputs.image }} 
-       outfile: ${{ inputs.outfile }} 
-       outdir: ${{ inputs.outdir }} 
+       image: ${{ inputs.image }}
+       outfile: ${{ inputs.outfile }}
+       outdir: ${{ inputs.outdir }}
        includes: ${{ inputs.include }}
-     run: | 
+     run: |
         cmd="guts manifest"
         if [ "${outfile}" != "" ]; then
             cmd="${cmd} --outfile ${outfile}"
@@ -45,7 +45,7 @@ runs:
         for include in ${includes}; do
             cmd="${cmd} --include ${include}"
         done
-        cmd="${cmd} ${image}" 
+        cmd="${cmd} ${image}"
         printf "${cmd}\n"
         ${cmd}
      shell: bash

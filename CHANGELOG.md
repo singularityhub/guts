@@ -14,10 +14,10 @@ and **Merged pull requests**. Critical items to know are:
 The versions coincide with releases on pip. Only major versions will be released as tags on Github.
 
 ## [0.0.x](https://github.com/singularityhub/guts/tree/main) (0.0.x)
+ - add function for most similar (0.0.16)
  - skip /dev in tar (0.0.15)
  - diff action and support (0.0.14)
  - adding fs (filesystem) extraction support (0.0.13)
  - tag should be own file (0.0.12)
  - Support for output directory (so path prepared by guts) (0.0.11)
  - Initial creation of project (0.0.1)
-

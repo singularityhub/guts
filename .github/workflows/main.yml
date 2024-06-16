@@ -21,19 +21,9 @@ jobs:
         with:
           files: ./docs/getting_started/ ./docs/index.rst
 
-      - name: Lint python code
+      - name: Lint and format Python code
         run: |
           export PATH="/usr/share/miniconda/bin:$PATH"
           source activate black
-          pip install black
-          black --check container_guts
-          
-      - name: Check imports with pyflakes
-        run: |
-          export PATH="/usr/share/miniconda/bin:$PATH"
-          source activate black
-          pyflakes container_guts/*.py
-          pyflakes container_guts/client
-          pyflakes container_guts/main/client.py
-          pyflakes container_guts/main/templates.py
-          pyflakes container_guts/main/container/docker.py
+          pip install -r .github/dev-requirements.txt
+          pre-commit run --all-files

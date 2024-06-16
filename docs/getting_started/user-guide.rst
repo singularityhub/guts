@@ -10,7 +10,7 @@ If you haven't installed Guts yet, you should read :ref:`getting_started-install
 Commands
 ========
 
-Guts currently has just one client command, "manifest" to 
+Guts currently has just one client command, "manifest" to
 get a manifest of executables on the ``PATH``!
 
 --------
@@ -43,7 +43,7 @@ Or to get fs and paths:
 
 .. code-block:: console
 
-    $ guts manifest --include paths --include fs ubuntu --outfile ubuntu-guts.json 
+    $ guts manifest --include paths --include fs ubuntu --outfile ubuntu-guts.json
 
 
 This generic "manifest" command is the main entrypoint to extract guts.
@@ -54,7 +54,7 @@ Diff
 
 **under development**
 
-A diff will take your container and compares it against a set of base images, 
+A diff will take your container and compares it against a set of base images,
 and only reveals the diff output (the executables in PATH that are special
 to your container). If you don't provide a database (repository or path
 on the filesystem) we use the default at ``singularityhub/shpc-guts``.
@@ -80,7 +80,7 @@ For a single image (e.g., on dispatch)
 
     name: Generate Container Guts
     on:
-      workflow_dispatch: 
+      workflow_dispatch:
         inputs:
           docker_uri:
             description: 'Docker identifier to generate recipe for'
@@ -108,7 +108,7 @@ Matrix Images Manifest
 or for a matrix! E.g., you might want to save them nested in their directory
 location.
 
-    
+
 .. code-block:: yaml
 
     name: Generate Container Guts
@@ -204,5 +204,3 @@ The above would be the same as doing:
 
 Note that for all of the above, by default guts will be installed for you, unless you install a custom
 version in a previous step.
-
-

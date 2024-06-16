@@ -16,10 +16,11 @@ def main(args, parser, extra, subparser):
     print("       outfile: %s" % args.outfile)
     print("        outdir: %s" % args.outdir)
     print("container tech: %s" % args.container_tech)
-    print("       include: %s" % args.guts)
+    print("      database: %s" % args.database)
 
+    # Derive an initial manifest
     cli = ManifestGenerator(tech=args.container_tech)
-    manifests = cli.run(args.image, includes=args.guts)
+    manifests = cli.similar(args.image, database=args.database)
     outfile = None
 
     # Default to using outfile first, then outdir if defined

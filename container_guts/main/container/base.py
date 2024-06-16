@@ -1,11 +1,11 @@
 __author__ = "Vanessa Sochat"
-__copyright__ = "Copyright 2021-2022, Vanessa Sochat"
+__copyright__ = "Copyright 2021-2024, Vanessa Sochat"
 __license__ = "MPL 2.0"
 
 import os
 import re
-
 import shutil
+
 import container_guts.main.templates as templates
 import container_guts.utils as utils
 from container_guts.logger import logger

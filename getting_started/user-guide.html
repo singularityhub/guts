@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Guide &mdash; Container Guts &#39;Guts&#39; 0.0.15 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+  <title>User Guide &mdash; Container Guts &#39;Guts&#39; 0.0.16 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-argparse.css?v=24ffd50e" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme.css?v=1e8d79bf" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c7cdf6fe"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -36,7 +39,7 @@
             Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.15
+                0.0.16
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -52,6 +55,7 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#commands">Commands</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#manifest">Manifest</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#similar">Similar</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diff">Diff</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#github-action">GitHub Action</a></li>
 </ul>
@@ -93,14 +97,14 @@
            <div itemprop="articleBody">
              
   <section id="user-guide">
-<span id="getting-started-user-guide"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Permalink to this heading"></a></h1>
+<span id="getting-started-user-guide"></span><h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading"></a></h1>
 <p>If you haven’t installed Guts yet, you should read <a class="reference internal" href="installation.html#getting-started-installation"><span class="std std-ref">Installation</span></a> first.</p>
 <section id="commands">
-<h2>Commands<a class="headerlink" href="#commands" title="Permalink to this heading"></a></h2>
+<h2>Commands<a class="headerlink" href="#commands" title="Link to this heading"></a></h2>
 <p>Guts currently has just one client command, “manifest” to
 get a manifest of executables on the <code class="docutils literal notranslate"><span class="pre">PATH</span></code>!</p>
 <section id="manifest">
-<h3>Manifest<a class="headerlink" href="#manifest" title="Permalink to this heading"></a></h3>
+<h3>Manifest<a class="headerlink" href="#manifest" title="Link to this heading"></a></h3>
 <p>Using guts on the command line is the easiest way to test it manually,
 and by default, the results will be printed to the screen. The manifest
 command will generate “guts” for an image:</p>
@@ -122,9 +126,19 @@ to extract all filesystem paths:</p>
 </div>
 <p>This generic “manifest” command is the main entrypoint to extract guts.</p>
 </section>
+<section id="similar">
+<h3>Similar<a class="headerlink" href="#similar" title="Link to this heading"></a></h3>
+<p>This command calculates a similarity comparison between your container and the database
+of base images we maintain with shpc. We do this based on filesystem paths. We first remove
+all paths that are unique to your image, and then with what is left, we calculate the intersection
+over the total filesystem paths left in your image, which is saying “The percentage of non-unique
+paths that are shared between your image and the contender base.”</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>guts<span class="w"> </span>similar<span class="w"> </span>vanessa/salad
+</pre></div>
+</div>
+</section>
 <section id="diff">
-<h3>Diff<a class="headerlink" href="#diff" title="Permalink to this heading"></a></h3>
-<p><strong>under development</strong></p>
+<h3>Diff<a class="headerlink" href="#diff" title="Link to this heading"></a></h3>
 <p>A diff will take your container and compares it against a set of base images,
 and only reveals the diff output (the executables in PATH that are special
 to your container). If you don’t provide a database (repository or path
@@ -132,12 +146,11 @@ on the filesystem) we use the default at <code class="docutils literal notransla
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>guts<span class="w"> </span>diff<span class="w"> </span>vanessa/salad
 </pre></div>
 </div>
-<p>Note that this command is not officially added yet!</p>
 <section id="github-action">
-<h4>GitHub Action<a class="headerlink" href="#github-action" title="Permalink to this heading"></a></h4>
+<h4>GitHub Action<a class="headerlink" href="#github-action" title="Link to this heading"></a></h4>
 <p>You can use one of our GitHub actions to extract guts!</p>
 <section id="single-image-manifest">
-<h5>Single Image Manifest<a class="headerlink" href="#single-image-manifest" title="Permalink to this heading"></a></h5>
+<h5>Single Image Manifest<a class="headerlink" href="#single-image-manifest" title="Link to this heading"></a></h5>
 <p>For a single image (e.g., on dispatch)</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate Container Guts</span>
 <span class="nt">on</span><span class="p">:</span>
@@ -165,7 +178,7 @@ on the filesystem) we use the default at <code class="docutils literal notransla
 </div>
 </section>
 <section id="matrix-images-manifest">
-<h5>Matrix Images Manifest<a class="headerlink" href="#matrix-images-manifest" title="Permalink to this heading"></a></h5>
+<h5>Matrix Images Manifest<a class="headerlink" href="#matrix-images-manifest" title="Link to this heading"></a></h5>
 <p>or for a matrix! E.g., you might want to save them nested in their directory
 location.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Generate Container Guts</span>
@@ -226,7 +239,7 @@ env:</p>
 </div></blockquote>
 </section>
 <section id="id1">
-<h5>Diff<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h5>
+<h5>Diff<a class="headerlink" href="#id1" title="Link to this heading"></a></h5>
 <p>The core functionality of guts is to discover new or interesting things in
 the PATH, and this is the goal of diff. You can provide a guts root
 path with your custom guts (e.g., the content of <a class="reference external" href="https://github.com/singularityhub/shpc-guts">shpc-guts</a>

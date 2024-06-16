@@ -1,22 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>container_guts.utils package &mdash; Container Guts &#39;Guts&#39; 0.0.15 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/sphinx-argparse.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/theme.css" type="text/css" />
+  <title>container_guts.utils package &mdash; Container Guts &#39;Guts&#39; 0.0.16 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-argparse.css?v=24ffd50e" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme.css?v=1e8d79bf" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=c7cdf6fe"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -36,7 +39,7 @@
             Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.15
+                0.0.16
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -101,113 +104,113 @@
            <div itemprop="articleBody">
              
   <section id="container-guts-utils-package">
-<h1>container_guts.utils package<a class="headerlink" href="#container-guts-utils-package" title="Permalink to this heading"></a></h1>
+<h1>container_guts.utils package<a class="headerlink" href="#container-guts-utils-package" title="Link to this heading"></a></h1>
 <section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading"></a></h2>
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
 <section id="module-container_guts.utils.fileio">
-<span id="container-guts-utils-fileio-module"></span><h2>container_guts.utils.fileio module<a class="headerlink" href="#module-container_guts.utils.fileio" title="Permalink to this heading"></a></h2>
+<span id="container-guts-utils-fileio-module"></span><h2>container_guts.utils.fileio module<a class="headerlink" href="#module-container_guts.utils.fileio" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.can_be_deleted">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">can_be_deleted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#can_be_deleted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.can_be_deleted" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">can_be_deleted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ignore_files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#can_be_deleted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.can_be_deleted" title="Link to this definition"></a></dt>
 <dd><p>A path can be deleted if it contains no entries, <em>or</em>
 if the only files are in ignore_files</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.copyfile">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">copyfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#copyfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.copyfile" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">copyfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#copyfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.copyfile" title="Link to this definition"></a></dt>
 <dd><p>Copy a file from a source to its destination.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.creation_date">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">creation_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#creation_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.creation_date" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">creation_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#creation_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.creation_date" title="Link to this definition"></a></dt>
 <dd><p>Get the creation date, and fallback to modified date.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.get_file_hash">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_file_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sha256'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#get_file_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.get_file_hash" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_file_hash</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">image_path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'sha256'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#get_file_hash"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.get_file_hash" title="Link to this definition"></a></dt>
 <dd><p>Return an sha256 hash of the file based on a criteria level.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.get_tmpdir">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_tmpdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmpdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#get_tmpdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.get_tmpdir" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_tmpdir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmpdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#get_tmpdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.get_tmpdir" title="Link to this definition"></a></dt>
 <dd><p>Get a temporary directory for an operation.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.get_tmpfile">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_tmpfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmpdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#get_tmpfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.get_tmpfile" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">get_tmpfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tmpdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#get_tmpfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.get_tmpfile" title="Link to this definition"></a></dt>
 <dd><p>Get a temporary file with an optional prefix.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.mkdir_p">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">mkdir_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#mkdir_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.mkdir_p" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">mkdir_p</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#mkdir_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.mkdir_p" title="Link to this definition"></a></dt>
 <dd><p>Make a directory path if it does not exist, akin to mkdir -p</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.mkdirp">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">mkdirp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirnames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#mkdirp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.mkdirp" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">mkdirp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dirnames</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#mkdirp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.mkdirp" title="Link to this definition"></a></dt>
 <dd><p>Create one or more directories</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.print_json">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">print_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#print_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.print_json" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">print_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#print_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.print_json" title="Link to this definition"></a></dt>
 <dd><p>Print json pretty</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.read_file">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.read_file" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">read_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#read_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.read_file" title="Link to this definition"></a></dt>
 <dd><p>Read a file.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.read_json">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">read_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#read_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.read_json" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">read_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'r'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#read_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.read_json" title="Link to this definition"></a></dt>
 <dd><p>Read a json file to a dictionary.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.recursive_find">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">recursive_find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#recursive_find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.recursive_find" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">recursive_find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#recursive_find"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.recursive_find" title="Link to this definition"></a></dt>
 <dd><p>Find filenames that match a particular pattern, and yield them.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.remove_to_base">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">remove_to_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#remove_to_base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.remove_to_base" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">remove_to_base</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#remove_to_base"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.remove_to_base" title="Link to this definition"></a></dt>
 <dd><p>Delete the tree under $path and all the parents
 up to $base_path as long as they are empty</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.write_file">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#write_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.write_file" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">exec</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#write_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.write_file" title="Link to this definition"></a></dt>
 <dd><p>Write content to a filename</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.fileio.write_json">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">write_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#write_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.write_json" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.fileio.</span></span><span class="sig-name descname"><span class="pre">write_json</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">json_obj</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'w'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/fileio.html#write_json"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.fileio.write_json" title="Link to this definition"></a></dt>
 <dd><p>Write json to a filename</p>
 </dd></dl>
 
 </section>
 <section id="module-container_guts.utils.terminal">
-<span id="container-guts-utils-terminal-module"></span><h2>container_guts.utils.terminal module<a class="headerlink" href="#module-container_guts.utils.terminal" title="Permalink to this heading"></a></h2>
+<span id="container-guts-utils-terminal-module"></span><h2>container_guts.utils.terminal module<a class="headerlink" href="#module-container_guts.utils.terminal" title="Link to this heading"></a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.terminal.confirm_action">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">confirm_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#confirm_action"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.confirm_action" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">confirm_action</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">question</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#confirm_action"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.confirm_action" title="Link to this definition"></a></dt>
 <dd><p>confirm if the user wants to perform a certain action</p>
 <section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this heading"></a></h3>
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
 <p>question: the question that will be asked
 force: if the user wants to skip the prompt</p>
 </section>
@@ -215,27 +218,27 @@ force: if the user wants to skip the prompt</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.terminal.ensure_no_extra">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">ensure_no_extra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extra</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#ensure_no_extra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.ensure_no_extra" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">ensure_no_extra</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">extra</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#ensure_no_extra"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.ensure_no_extra" title="Link to this definition"></a></dt>
 <dd><p>Ensure no extra arguments (in case typos)</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.terminal.get_installdir">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">get_installdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#get_installdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.get_installdir" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">get_installdir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#get_installdir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.get_installdir" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.terminal.get_userhome">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">get_userhome</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#get_userhome"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.get_userhome" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">get_userhome</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#get_userhome"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.get_userhome" title="Link to this definition"></a></dt>
 <dd><p>Get the user home based on the effective uid.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="container_guts.utils.terminal.run_command">
-<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sudo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#run_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.run_command" title="Permalink to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">container_guts.utils.terminal.</span></span><span class="sig-name descname"><span class="pre">run_command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cmd</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sudo</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stream</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/container_guts/utils/terminal.html#run_command"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#container_guts.utils.terminal.run_command" title="Link to this definition"></a></dt>
 <dd><p>run_command uses subprocess to send a command to the terminal.</p>
 <section id="id1">
-<h3>Parameters<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<h3>Parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
 <p>cmd: the command to send, should be a list for subprocess
 error_message: the error message to give to user if fails,
 if none specified, will alert that command failed.</p>
@@ -244,7 +247,7 @@ if none specified, will alert that command failed.</p>
 
 </section>
 <section id="module-container_guts.utils">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-container_guts.utils" title="Permalink to this heading"></a></h2>
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-container_guts.utils" title="Link to this heading"></a></h2>
 </section>
 </section>
 

@@ -12,7 +12,7 @@ first draft, we:
 
 And since we want to find "special" executables in a container, the intended
 workflow will be to have a set of core bases (e.g., ubuntu) that we can subtract
-one. 
+one.
 If you have any questions or issues, please `let us know <https://github.com/singularityhub/guts/issues>`_
 
 .. toctree::

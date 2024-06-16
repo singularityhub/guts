@@ -1,21 +1,24 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../../../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>container_guts.utils.terminal &mdash; Container Guts &#39;Guts&#39; 0.0.15 documentation</title>
-      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/sphinx-argparse.css" type="text/css" />
-      <link rel="stylesheet" href="../../../_static/theme.css" type="text/css" />
+  <title>container_guts.utils.terminal &mdash; Container Guts &#39;Guts&#39; 0.0.16 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-argparse.css?v=24ffd50e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme.css?v=1e8d79bf" />
+
+  
   <!--[if lt IE 9]>
     <script src="../../../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-        <script src="../../../_static/doctools.js"></script>
-        <script src="../../../_static/sphinx_highlight.js"></script>
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=c7cdf6fe"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -33,7 +36,7 @@
             Container Guts 'Guts'
           </a>
               <div class="version">
-                0.0.15
+                0.0.16
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -80,16 +83,19 @@
              
   <h1>Source code for container_guts.utils.terminal</h1><div class="highlight"><pre>
 <span></span><span class="n">__author__</span> <span class="o">=</span> <span class="s2">&quot;Vanessa Sochat&quot;</span>
-<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2021-2022, Vanessa Sochat&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright 2021-2024, Vanessa Sochat&quot;</span>
 <span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;MPL 2.0&quot;</span>
 
 
 <span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">PIPE</span><span class="p">,</span> <span class="n">STDOUT</span><span class="p">,</span> <span class="n">Popen</span>
+
 <span class="kn">from</span> <span class="nn">container_guts.logger</span> <span class="kn">import</span> <span class="n">logger</span>
 
 
-<div class="viewcode-block" id="ensure_no_extra"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.ensure_no_extra">[docs]</a><span class="k">def</span> <span class="nf">ensure_no_extra</span><span class="p">(</span><span class="n">extra</span><span class="p">):</span>
+<div class="viewcode-block" id="ensure_no_extra">
+<a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.ensure_no_extra">[docs]</a>
+<span class="k">def</span> <span class="nf">ensure_no_extra</span><span class="p">(</span><span class="n">extra</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Ensure no extra arguments (in case typos)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -100,11 +106,17 @@
         <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="get_installdir"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.get_installdir">[docs]</a><span class="k">def</span> <span class="nf">get_installdir</span><span class="p">():</span>
+
+<div class="viewcode-block" id="get_installdir">
+<a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.get_installdir">[docs]</a>
+<span class="k">def</span> <span class="nf">get_installdir</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)))</span></div>
 
 
-<div class="viewcode-block" id="get_userhome"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.get_userhome">[docs]</a><span class="k">def</span> <span class="nf">get_userhome</span><span class="p">():</span>
+
+<div class="viewcode-block" id="get_userhome">
+<a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.get_userhome">[docs]</a>
+<span class="k">def</span> <span class="nf">get_userhome</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the user home based on the effective uid.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -112,12 +124,15 @@
         <span class="kn">import</span> <span class="nn">pwd</span>
 
         <span class="k">return</span> <span class="n">pwd</span><span class="o">.</span><span class="n">getpwuid</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getuid</span><span class="p">())[</span><span class="mi">5</span><span class="p">]</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="c1"># Fallback to envar for Windows, etc.</span>
         <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;HOME&quot;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="run_command"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.run_command">[docs]</a><span class="k">def</span> <span class="nf">run_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">sudo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="run_command">
+<a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.run_command">[docs]</a>
+<span class="k">def</span> <span class="nf">run_command</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">sudo</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">stream</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    run_command uses subprocess to send a command to the terminal.</span>
 
@@ -148,7 +163,10 @@
     <span class="k">return</span> <span class="n">output</span></div>
 
 
-<div class="viewcode-block" id="confirm_action"><a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.confirm_action">[docs]</a><span class="k">def</span> <span class="nf">confirm_action</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="confirm_action">
+<a class="viewcode-back" href="../../../api_reference/container_guts.utils.html#container_guts.utils.terminal.confirm_action">[docs]</a>
+<span class="k">def</span> <span class="nf">confirm_action</span><span class="p">(</span><span class="n">question</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;confirm if the user wants to perform a certain action</span>
 
 <span class="sd">    Parameters</span>
@@ -166,6 +184,7 @@
     <span class="k">if</span> <span class="n">response</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="ow">in</span> <span class="s2">&quot;no&quot;</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
     <span class="k">return</span> <span class="kc">True</span></div>
+
 </pre></div>
 
            </div>

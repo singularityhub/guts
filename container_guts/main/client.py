@@ -110,6 +110,39 @@ class ManifestGenerator:
         return {image.uri: self.manifests[image.uri]}
 
     @ensure_container
+    def trace(self, image, paths, cleanup=True):
+        """
+        Find and trace a binary in the container
+
+        Paths must be provided, either the full path or a basename.
+        """
+        print(f"Looking for {len(paths)} path(s) in image")
+        tmpdir = self.container.export(image, cleanup=False)
+
+        # Results will be lookup with binary path and links
+        results = {}
+        for path in paths:
+
+            # We rely on the user to provide something on the path OR a fullpath
+            links = self.container.execute(image, ["ldd", path])
+            if links["return_code"] != 0:
+                print(links["message"])
+                return
+            links = [
+                x.replace("\t", "") for x in links["message"].split("\n") if x.strip()
+            ]
+            results[path] = [
+                x.split("(")[0].split("=> ")[-1] for x in links if "=>" in x
+            ]
+
+        if cleanup:
+            self.container.cleanup(image)
+
+        # Assume that something that isn't linked won't be mapped
+        shutil.rmtree(tmpdir, ignore_errors=True)
+        return results
+
+    @ensure_container
     def get_environment_paths(self, image):
         """
         Get environment paths.

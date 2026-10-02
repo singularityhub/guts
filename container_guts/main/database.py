@@ -18,19 +18,53 @@ class Database:
         self.do_cleanup = False
         self.set_database()
 
+    @staticmethod
+    def executable_names(entry):
+        """
+        Basenames of the executables on PATH in a manifest.
+
+        A manifest's "paths" already maps a PATH directory to the basenames it
+        holds, so there is no path manipulation to do here. Keys that are not
+        absolute paths are skipped: _parse_paths matches any environment
+        variable *containing* "PATH", so real manifests carry keys such as
+        "MODULE/etc/lmod/modules" and "LD_LIBRARY_/.singularity.d/libs".
+        """
+        return {
+            name
+            for directory, names in (entry.get("paths") or {}).items()
+            if directory.startswith(os.sep)
+            for name in names
+        }
+
     def diff(self, manifest):
         """
         Do a diff of the image against the database.
 
         This is fairly stupid, but I found it works well to just subtract all
         the base images, and meaningful added stuff is left.
+
+        Subtracting whole paths is not enough on its own. Base images disagree
+        about where they keep the same executable - busybox puts its applets in
+        /bin, while images built on it symlink them into /sbin and /usr/sbin,
+        and conda ships its own copies of ncurses tools under /usr/local/bin.
+        Those never cancel out as strings, so the base binaries come back out
+        of the diff looking unique. An executable on PATH is identified by its
+        name, so also drop anything whose basename belongs to a base image, and
+        report those separately as "shadowed_paths" so a caller that knows
+        better (e.g. a tool that really is named "sort") can put one back.
+
+        "unique_fs" stays a plain path-level difference - it is a filesystem
+        comparison rather than a statement about executables, and similar()
+        scores off it.
         """
         fs = set(manifest["fs"])
         count = len(fs)
+        base_names = set()
         for data in self.iter_containers():
             base_image = list(data.keys())[0]
-            base_fs = set(list(data.values())[0]["fs"])
-            fs = fs.difference(base_fs)
+            entry = list(data.values())[0]
+            fs = fs.difference(set(entry["fs"]))
+            base_names.update(self.executable_names(entry))
             difference = count - len(fs)
             print(f"{base_image}: removed {difference} shared paths.")
             count = len(fs)
@@ -40,10 +74,11 @@ class Database:
         )
 
         # Filter down to thoses in PATH or entrypoint
+        on_path = [x for x in fs if x in manifest.get("entrypoint", []) or x in paths]
+        shadowed = [x for x in on_path if os.path.basename(x) in base_names]
         return {
-            "unique_paths": sorted(
-                list(x for x in fs if x in manifest.get("entrypoint", []) or x in paths)
-            ),
+            "unique_paths": sorted(set(on_path).difference(shadowed)),
+            "shadowed_paths": sorted(shadowed),
             "unique_fs": sorted(list(fs)),
         }
 

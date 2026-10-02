@@ -91,7 +91,7 @@ def get_parser():
             "--container-tech",
             dest="container_tech",
             help="container technology to use for exporting",
-            choices=["docker"],
+            choices=["docker", "singularity"],
             default="docker",
         )
         command.add_argument(

@@ -28,9 +28,13 @@ class ManifestGenerator:
         """
         if tech == "docker":
             from .container import DockerContainer
-        else:
-            logger.exit(f"Container technology {tech} is not supported.")
-        self.container = DockerContainer()
+            self.container = DockerContainer()
+            return
+        if tech == "singularity":
+            from .container import SingularityContainer
+            self.container = SingularityContainer()
+            return
+        logger.exit(f"Container technology {tech} is not supported.")
 
     @ensure_container
     def save_path(self, image):
@@ -45,7 +49,7 @@ class ManifestGenerator:
         """
         if isinstance(image, ContainerName):
             return image
-        return ContainerName(image)
+        return self.container.get_container(image)
 
     @ensure_container
     def diff(self, image, database=None):
@@ -212,15 +216,21 @@ class ManifestGenerator:
     def _parse_paths(self, envar):
         """
         Parse a string environment variable for paths.
+
+        Only PATH itself. Matching any variable that merely contains "PATH"
+        pulls in MODULEPATH, LD_LIBRARY_PATH, MANPATH and friends, and since
+        only the literal "PATH=" is stripped their prefix stays glued to the
+        first entry - which is where manifest keys like
+        "LD_LIBRARY_/.singularity.d/libs" come from.
         """
         paths = []
         # Cut out early given empty string
         if not envar:
             return paths
-        if "PATH" in envar:
+        name, _, value = envar.partition("=")
+        if name.strip() == "PATH":
             print(envar)
-            envar = envar.replace(" ", "").replace("PATH=", "").strip()
-            for path in envar.split(":"):
+            for path in value.replace(" ", "").strip().split(":"):
                 if not path:
                     continue
                 paths.append(path)

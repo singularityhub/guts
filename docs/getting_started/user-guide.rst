@@ -76,6 +76,22 @@ on the filesystem) we use the default at ``singularityhub/shpc-guts``.
     $ guts diff vanessa/salad
 
 
+The output has three keys. ``unique_paths`` is the answer you usually want: the
+executables on PATH that are special to your container. ``unique_fs`` is the
+plain filesystem difference, every path your image has that no base image does.
+
+Base images disagree about where they keep the same executable. Busybox puts
+its applets in ``/bin``, while images built on top of it symlink them into
+``/sbin`` and ``/usr/sbin``, and conda ships its own copies of the ncurses
+tools under ``/usr/local/bin``. Comparing whole paths never cancels those out,
+so they used to come back looking unique to your container. An executable on
+PATH is identified by its name, so ``unique_paths`` also drops anything whose
+basename belongs to a base image, and lists what it dropped under
+``shadowed_paths``. If your container genuinely provides a tool that shares a
+name with a base binary - something called ``sort`` or ``time`` - look for it
+there.
+
+
 GitHub Action
 -------------
 
